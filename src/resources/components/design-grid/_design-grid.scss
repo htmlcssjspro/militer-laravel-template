@@ -1,0 +1,58 @@
+@use 'scss/config/config';
+@use 'scss/config/viewport';
+@use 'assets/scss/position';
+@use 'assets/scss/flex';
+@use 'sass:math';
+
+@if config.$DEV and config.$DESIGN_GRID {
+    $gap: 20px;
+    $margin: math.div($gap, 2);
+
+    .design-grid {
+        & {
+            @extend %position-fixed-full;
+            max-width: viewport.$content-max-width;
+            margin: viewport.$wrapper-margin;
+            height: 0;
+            overflow: visible;
+            z-index: 1000;
+        }
+
+        &__wrapper {
+            @extend %flex-sb;
+            margin: 0 (-$margin);
+            // position: relative;
+        }
+
+        &__col {
+            flex: 1 1;
+            margin: 0 $margin;
+            position: relative;
+        }
+
+        &__line {
+            & {
+                position: absolute;
+                width: 1px;
+                height: 100vh;
+                background-color: blue;
+            }
+
+            $line: &;
+
+            &_left {
+                @extend #{$line};
+                left: 0;
+            }
+
+            &_right {
+                @extend #{$line};
+                right: 0;
+            }
+        }
+    }
+} @else if config.$DEV {
+    .design-grid {
+        display: none;
+    }
+}
