@@ -1,7 +1,0 @@
-@use 'scss/config/config';
-
-@mixin grid-area($name) {
-    @if config.$USE_GRID {
-        grid-area: $name;
-    }
-}
