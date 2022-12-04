@@ -18,11 +18,9 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'breeze:install {stack=blade : The development stack that should be installed (blade,react,vue,api)}
-                            {--inertia : Indicate that the Vue Inertia stack should be installed (Deprecated)}
-                            {--pest : Indicate that Pest should be installed}
-                            {--ssr : Indicates if Inertia SSR support should be installed}
-                            {--composer=global : Absolute path to the Composer binary which should be used to install packages}';
+    protected $signature = 'militer-template:install
+                            {stack=default : The development stack that should be installed (default)}
+                            {--some-key=value : Some key and their defalt value}';
 
     /**
      * The console command description.
@@ -60,9 +58,47 @@ class InstallCommand extends Command
             ]
         );
 
+        // Controllers...
+        // (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Auth'));
+        // (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/default/app/Http/Controllers/Auth', app_path('Http/Controllers/Auth'));
 
+        // Views...
+        // (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
+        // (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
+        // (new Filesystem)->ensureDirectoryExists(resource_path('views/components'));
 
-        $this->components->error('Error Description');
+        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/auth', resource_path('views/auth'));
+        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/layouts', resource_path('views/layouts'));
+        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/components', resource_path('views/components'));
+
+        // copy(__DIR__ . '/../../stubs/default/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
+
+        // Components...
+        // (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
+        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/app/View/Components', app_path('View/Components'));
+
+        // Routes...
+        // copy(__DIR__ . '/../../stubs/default/routes/web.php', base_path('routes/web.php'));
+        // copy(__DIR__ . '/../../stubs/default/routes/auth.php', base_path('routes/auth.php'));
+
+        // "Dashboard" Route...
+        // $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
+        // $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
+        // $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
+
+        // Tailwind / Vite...
+        copy(__DIR__ . '/../../stubs/default/vite.config.js', base_path('vite.config.js'));
+        copy(__DIR__ . '/../../stubs/default/.eslintrc.json', base_path('.eslintrc.json'));
+        copy(__DIR__ . '/../../stubs/default/.htaccess', base_path('.htaccess'));
+        copy(__DIR__ . '/../../stubs/default/tailwind.config.js', base_path('tailwind.config.js'));
+        copy(__DIR__ . '/../../stubs/default/postcss.config.js', base_path('postcss.config.js'));
+        copy(__DIR__ . '/../../stubs/default/resources/js/app.js', resource_path('js/app.js'));
+        copy(__DIR__ . '/../../stubs/default/resources/css/app.css', resource_path('css/app.css'));
+
+        $this->runCommands(['npm install', 'npm run build']);
+        $this->line('');
+        $this->components->info('Militer Template scaffolding installed successfully.');
+        $this->components->error('Militer Template Error');
 
         return 1;
     }
