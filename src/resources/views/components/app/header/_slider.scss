@@ -1,0 +1,72 @@
+@use '/resources/scss/config';
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/position';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/indent';
+
+@use '/resources/scss/icons/svg-icons';
+
+@use '/resources/views/components/svg/symbol';
+
+@use '/resources/views/components/swiper';
+
+.swiper.header-slider {
+    height: 488px;
+
+    .swiper-slide {
+        @extend %pos-r;
+
+        padding: 69px 112px;
+
+        img {
+            @extend %pos-a-full;
+            z-index: -1;
+            // height: 100%;
+        }
+
+        .title {
+            font-size: 6.4rem;
+            font-weight: 900;
+            white-space: pre-wrap;
+        }
+
+        .btn_slider {
+            @extend %font-size-28;
+            @extend %fw-600;
+            @extend .p-cell;
+            margin-top: 0.5em;
+        }
+    }
+
+    .swiper-button-prev,
+    .swiper-button-next {
+        top: auto;
+        bottom: 30px;
+        width: 80px;
+        height: 80px;
+        margin: 0;
+        background-color: hsla(0, 0%, 23%, 0.8);
+
+        &::after {
+            content: '';
+        }
+
+        .svg-symbol {
+            width: 21px;
+            height: 37px;
+            fill: colors.$white;
+        }
+    }
+
+    .swiper-button-prev {
+        left: auto;
+        right: 140px;
+    }
+
+    .swiper-button-next {
+        left: auto;
+        right: 45px;
+    }
+}

@@ -1,0 +1,32 @@
+@use '/resources/scss/config';
+
+//* Viewport
+// bootstrap
+$breakpoint-xl: 1200px !default;
+$breakpoint-lg: 992px !default;
+$breakpoint-md: 768px !default;
+$breakpoint-sm: 576px !default;
+$breakpoint-xs: 0 !default;
+
+$max-width-xl: 1140px !default;
+$max-width-lg: 960px !default;
+$max-width-md: 720px !default;
+$max-width-sm: 540px !default;
+
+//* container & content size
+$container-max-width: 1920px !default;
+$content-max-width: 1366px !default;
+$content-min-width: 320px !default;
+$container-gap: 5rem !default;
+
+//* container&wrapper margin&padding
+$container-margin: 0 auto !default;
+$container-padding: 0 !default;
+
+$content-margin: 0 auto !default;
+$content-padding: 0 !default;
+
+$wrapper-margin: 0 !default;
+$wrapper-padding: 0 !default;
+
+$gap: 5rem !default;

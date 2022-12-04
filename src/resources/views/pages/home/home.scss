@@ -1,0 +1,39 @@
+@use '/resources/views/components/app/app';
+
+@use '/resources/scss/config';
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/grid';
+@use '/resources/scss/common/text';
+
+.home {
+    &.page-container {
+        & > .content {
+            margin-bottom: viewport.$gap;
+            padding-top: 3.5rem;
+
+            &.grid {
+                gap: 20px;
+                grid-template:
+                    'filter filters' auto
+                    'filter main' 1fr
+                    / 345px 1fr;
+            }
+        }
+    }
+
+    &__aside {
+        // @extend %font-size-14;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    &__main {
+        .main__wrapper.grid {
+            gap: 16px 20px;
+            grid-template: repeat(5, auto) / repeat(3, minmax(auto, 345px));
+        }
+    }
+}

@@ -1,0 +1,17 @@
+div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 300px;
+    height: 80px;
+    margin: 50px auto;
+
+    border: solid 10px transparent;
+    border-radius: 30px;
+    background-image: linear-gradient(white, white),
+        linear-gradient(to right, red, green, blue);
+    background-clip: content-box, border-box;
+
+    background-origin: border-box;
+}

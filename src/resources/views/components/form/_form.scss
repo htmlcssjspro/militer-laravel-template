@@ -1,0 +1,91 @@
+@use '/resources/scss/common/position';
+
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/position';
+@use '/resources/scss/common/indent';
+@use '/resources/scss/common/shadow';
+
+@use 'form';
+
+form {
+    fieldset {
+    }
+
+    label {
+        span {
+        }
+    }
+
+    input {
+    }
+
+    select {
+        option {
+        }
+    }
+
+    button {
+    }
+}
+
+input[type='text'],
+input[type='date'],
+input[type='time'],
+input[type='datetime-local'],
+textarea,
+select,
+option {
+    min-width: 420px;
+    @extend .p-cell;
+    background-color: colors.$bgc-dark;
+
+    border: 1px solid colors.$accent;
+    border-radius: 2px;
+
+    &:hover {
+        border-color: colors.$white;
+        @extend %shadow-lg;
+    }
+}
+
+form {
+    fieldset {
+    }
+
+    label {
+        span {
+            &:first-of-type {
+            }
+            &:nth-of-type(2) {
+            }
+        }
+    }
+
+    input {
+    }
+
+    select {
+        option {
+            &[selected] {
+                font-weight: bolder;
+            }
+        }
+    }
+
+    button {
+    }
+}
+
+.form {
+    &__input {
+    }
+    &__input-invisible {
+        @extend %pos-a;
+        // @include position.position(a, 0, 100%, 100%, 0);
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+}

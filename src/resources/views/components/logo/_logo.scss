@@ -1,0 +1,39 @@
+@use '/resources/scss/common/flex';
+
+$width: 100px !default;
+$height: 100px !default;
+// $url: '../img/logo/logo.png' !default;
+
+.logo {
+    // width: 170px;
+    // background: url($url) center / contain no-repeat;
+
+    a.flex {
+        @extend %flex-ai-c;
+    }
+
+    img {
+    }
+
+    span {
+        margin-left: 1em;
+    }
+
+    &_header {
+        font-size: 1.8rem;
+
+        img {
+            width: 34px;
+            height: 24px;
+        }
+    }
+
+    &_footer {
+        font-size: 1.8rem;
+
+        img {
+            width: 65px;
+            height: 46px;
+        }
+    }
+}

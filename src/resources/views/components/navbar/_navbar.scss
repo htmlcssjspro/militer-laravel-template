@@ -1,0 +1,58 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+
+.navbar {
+    & {
+        &_row {
+            &.flex {
+                @extend %flex-sb-c;
+            }
+        }
+
+        &_header {
+        }
+
+        &_footer {
+            &.flex {
+                @extend %flex-sb-fs;
+            }
+        }
+    }
+
+    &__list {
+        &_row {
+            &.flex {
+                @extend %flex-sb-c;
+            }
+        }
+
+        &.social {
+            @extend %flex-sb-c;
+            width: 100%;
+        }
+    }
+
+    &__list-title {
+        margin-bottom: 1em;
+    }
+
+    &__item {
+    }
+
+    &__group {
+        & {
+            // flex: 1 0;
+        }
+
+        &.flex {
+            @extend %flex-sb-c;
+        }
+    }
+
+    &__group-item {
+        &_footer {
+        }
+    }
+}

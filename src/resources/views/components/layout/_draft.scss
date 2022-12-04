@@ -1,0 +1,155 @@
+@use '/resources/scss/config';
+@use '/resources/scss/config/viewport';
+
+@use '/resources/scss/common/flex';
+
+@mixin aside {
+    @if config.$ASIDE and not config.$GRID {
+        @content;
+    }
+}
+@mixin no-aside {
+    @if not config.$ASIDE {
+        @content;
+    }
+}
+
+@include aside {
+    .content {
+        @extend %container;
+
+        &__wrapper {
+            @extend %wrapper;
+        }
+    }
+}
+
+.main {
+    @include aside {
+        //
+    }
+    @include no-aside {
+        @extend %container;
+    }
+
+    &__top,
+    &__bottom,
+    &__wrapper {
+        @include no-aside {
+            @extend %wrapper;
+        }
+    }
+}
+
+.aside {
+    @include aside {
+        //
+    }
+    @include no-aside {
+        @extend %container;
+    }
+
+    &__top,
+    &__bottom,
+    &__wrapper {
+        @include no-aside {
+            @extend %wrapper;
+        }
+    }
+}
+
+@function container-margin() {
+    @if config.$CONTAINER_GAP {
+        @return $container-gap auto;
+    } @else {
+        @return $container-margin;
+    }
+}
+@mixin container-first {
+    @if config.$CONTAINER_GAP {
+        margin-top: 0;
+    }
+}
+@mixin container-last {
+    @if config.$CONTAINER_GAP {
+        margin-bottom: 0;
+    }
+}
+
+@mixin dev-container {
+    $color: hsla(0, 100%, 50%, 0.5);
+    $border: 1px solid $color;
+    margin-bottom: 1px;
+    border-top: $border;
+    border-bottom: $border;
+    background-color: color.change($color, $lightness: 80%, $alpha: 0.1);
+}
+
+%dev-container {
+    @include dev-container;
+}
+
+%container {
+    max-width: $container-max-width;
+    min-width: $content-min-width;
+    width: 100%;
+    margin: container-margin();
+    padding: $container-padding;
+
+    &-first,
+    &:first-of-type {
+        @include container-first;
+    }
+    &-last,
+    &:last-of-type {
+        @include container-last;
+    }
+
+    // @if config.$DEV {
+    //     @extend %dev-container;
+    // }
+}
+
+%content {
+    max-width: $content-max-width;
+    min-width: $content-min-width;
+    width: 100%;
+    margin: $content-margin;
+    padding: $content-padding;
+
+    // @if config.$DEV {
+    //     @extend %dev-content;
+    // }
+}
+
+%wrapper {
+    min-width: $content-min-width;
+    width: 100%;
+    margin: $wrapper-margin;
+    padding: $wrapper-padding;
+
+    // @if config.$DEV {
+    //     @extend %dev-wrapper;
+    // }
+}
+
+.container {
+    @extend %container;
+
+    .container {
+        @extend .m-0;
+    }
+}
+
+.page-container {
+    min-height: 70rem;
+    padding-bottom: $gap;
+}
+
+.content {
+    @extend %content;
+}
+
+.wrapper {
+    @extend %wrapper;
+}

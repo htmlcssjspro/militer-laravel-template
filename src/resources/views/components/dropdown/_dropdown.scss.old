@@ -1,0 +1,59 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+
+@use '/resources/scss/components/dropdown/';
+@use '/resources/scss/icons/svg-icons';
+
+.dropdown-filter {
+    //* accordion
+    position: relative;
+
+    &__toggle {
+        @extend %flex-sb-c;
+        cursor: pointer;
+        &::after {
+            @extend %svg-icon-after;
+            @extend %svg-minus;
+            display: block;
+        }
+        &.hide {
+            &::after {
+                @extend %svg-plus;
+            }
+        }
+    }
+
+    &__content {
+        &.hide {
+            position: absolute;
+            visibility: hidden;
+        }
+    }
+}
+
+%dropdown-hover {
+    & {
+        position: relative;
+    }
+
+    & > span {
+        // font-size: 1.8rem;
+        // font-weight: bolder;
+        display: inline-block;
+        border-bottom: 1px dashed text.$color;
+        cursor: pointer;
+    }
+
+    & > div {
+        position: absolute;
+        display: none;
+        // @extend %box-shadow;
+        background: colors.$white;
+    }
+
+    &:hover > div {
+        display: block;
+    }
+}

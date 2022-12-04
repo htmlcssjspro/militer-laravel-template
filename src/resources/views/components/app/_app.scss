@@ -1,0 +1,15 @@
+// @use '@/';
+// @use '/resources/scss/';
+
+// @use '~/';
+// @use '/resources/views/components/';
+
+@use '/resources/scss/common/normalize';
+
+@use '/resources/views/components/app/body';
+@use '/resources/views/components/app/header/header';
+@use '/resources/views/components/app/main/main';
+@use '/resources/views/components/app/aside/aside';
+@use '/resources/views/components/app/footer/footer';
+
+@use '/resources/views/components/app/test/test';

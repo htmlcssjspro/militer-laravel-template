@@ -1,0 +1,9 @@
+@use '/resources/scss/config';
+@use '/resources/scss/config/viewport';
+
+.wrapper {
+    min-width: viewport.$content-min-width;
+    width: 100%;
+    margin: viewport.$wrapper-margin;
+    padding: viewport.$wrapper-padding;
+}

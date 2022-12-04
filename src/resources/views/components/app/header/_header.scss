@@ -1,0 +1,38 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/icons/svg-icons';
+
+@use '/resources/views/components/layout';
+
+@use '/resources/views/components/navbar/navbar';
+@use '/resources/views/components/logo/logo';
+@use '/resources/views/components/button/button';
+@use '/resources/views/components/link/link';
+@use '/resources/views/components/dropdown/dropdown';
+@use '/resources/views/components/svg/symbol';
+
+// @use '/resources/views/components/app/header/slider';
+@use '/resources/views/components/app/header/banner';
+
+.header {
+    & {
+        // background: url(../images/bg/bg-header.png) center/cover no-repeat;
+    }
+
+    &__wrapper {
+    }
+
+    &__content {
+    }
+
+    &__top {
+        padding: 1rem 0;
+        font-size: 1.4rem;
+        background-color: colors.$bgc-dark;
+    }
+
+    &__bottom {
+        font-size: 1.8rem;
+        background-color: colors.$bgc-light;
+    }
+}

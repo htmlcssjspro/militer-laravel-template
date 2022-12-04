@@ -1,0 +1,111 @@
+@use '/resources/assets/scss/config/colors';
+@use '/resources/assets/scss/common/flex';
+@use '/resources/assets/scss/common/position';
+
+.checkmark {
+    @extend %pos-a;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+
+    &:after {
+        content: '';
+        @extend %pos-a;
+        display: none;
+    }
+}
+
+.checkbox {
+    @extend %pos-r;
+    input {
+        @extend %pos-a;
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+    label {
+        @extend %flex-ai-c;
+        gap: 1em;
+        cursor: pointer;
+    }
+    input:checked + label {
+        background-color: colors.$active;
+    }
+
+    // .checkmark:after {
+    //     left: 9px;
+    //     top: 5px;
+    //     width: 5px;
+    //     height: 10px;
+    //     border: solid white;
+    //     border-width: 0 3px 3px 0;
+    //     -webkit-transform: rotate(45deg);
+    //     -ms-transform: rotate(45deg);
+    //     transform: rotate(45deg);
+    // }
+
+    // &:hover input ~ .checkmark {
+    //     background-color: hsl(0, 0%, 70%);
+    // }
+
+    // input:checked ~ .checkmark {
+    //     background-color: colors.$primary;
+    // }
+
+    // input:checked ~ .checkmark:after {
+    //     display: block;
+    // }
+}
+
+.radio {
+    @extend %pos-r;
+
+    & + .radio {
+        margin-top: 1em;
+    }
+    & + button {
+        margin-top: 2em;
+    }
+
+    input {
+        @extend %pos-a;
+        visibility: hidden;
+        opacity: 0;
+    }
+    label {
+        @extend %flex-ai-c;
+        gap: 1em;
+        cursor: pointer;
+    }
+    input:checked + label {
+        background-color: colors.$active;
+    }
+
+    .checkmark {
+        border-radius: 50%;
+
+        &:after {
+            top: 9px;
+            left: 9px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: white;
+        }
+    }
+
+    &:hover input ~ .checkmark {
+        background-color: hsl(0, 0%, 70%);
+    }
+
+    input:checked ~ .checkmark {
+        background-color: colors.$active;
+    }
+
+    input:checked ~ .checkmark:after {
+        display: block;
+    }
+}

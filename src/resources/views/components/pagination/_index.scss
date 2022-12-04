@@ -1,0 +1,53 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+
+@use '/resources/scss/icons/svg-icons';
+
+.pagination {
+    @extend %font-size-20;
+
+    &.flex {
+        @extend %flex-c;
+    }
+
+    & > .navbar {
+        margin: 6.5rem 0;
+    }
+
+    &__list {
+        // margin: 6.5rem 0;
+
+        &.flex {
+            gap: 1em;
+            @extend %flex-c;
+        }
+    }
+
+    &__item {
+    }
+
+    .page {
+        @extend %flex-c;
+        width: 48px;
+        height: 45px;
+
+        &.active {
+            background-color: colors.$accent;
+        }
+    }
+
+    .prev,
+    .next {
+        width: 11px;
+        height: 19px;
+        padding: 0;
+    }
+    .prev {
+        @extend %svg-caret-left;
+    }
+    .next {
+        @extend %svg-caret-right;
+    }
+}

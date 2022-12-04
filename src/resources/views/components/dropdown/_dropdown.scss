@@ -1,0 +1,57 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/position';
+@use '/resources/scss/common/pointer';
+
+@use '/resources/scss/icons/svg-icons';
+
+.dropdown {
+    & {
+        @extend %position-relative;
+    }
+
+    &__toggle {
+        @extend %svg-arrow-down_right;
+        @extend %pointer;
+    }
+
+    &__list,
+    &__menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        text-align: left;
+        background-clip: padding-box;
+
+        &.show {
+            display: block;
+        }
+    }
+
+    &__list {
+    }
+
+    &__menu {
+        margin-top: 0.125rem;
+        background-color: colors.$bgc-gray;
+
+        min-width: 10rem;
+        margin: 0;
+        padding: 0.5rem 0;
+        font-size: 1em;
+
+        border: 1px solid colors.$border;
+        border-radius: 0.25rem;
+    }
+
+    &__item {
+        display: block;
+        width: 100%;
+        padding: 0.5em 1em;
+        white-space: nowrap;
+    }
+}

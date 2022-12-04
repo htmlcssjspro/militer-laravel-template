@@ -1,0 +1,27 @@
+// @use '@/';
+// @use '/resources/scss/';
+
+// @use '~/';
+// @use '/resources/views/components/';
+
+//* Common
+@use '/resources/scss/common/normalize';
+
+@use '/resources/views/components/layout';
+
+@use '/resources/views/components/swiper/swiper';
+
+// @use '/resources/scss/components/wot/auth/auth';
+
+@use '/resources/views/components/app/app';
+
+//* Pages
+
+@use '/resources/views/pages/home';
+@use '/resources/views/pages/user';
+// @use '/resources/views/pages/admin';
+@use '/resources/views/pages/posts';
+@use '/resources/views/pages/news-posts';
+@use '/resources/views/pages/blog-posts';
+@use '/resources/views/pages/rating';
+@use '/resources/views/pages/battles';

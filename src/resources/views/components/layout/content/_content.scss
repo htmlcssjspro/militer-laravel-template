@@ -1,0 +1,10 @@
+@use '/resources/scss/config';
+@use '/resources/scss/config/viewport';
+
+.content {
+    max-width: viewport.$content-max-width;
+    min-width: viewport.$content-min-width;
+    width: 100%;
+    margin: viewport.$content-margin;
+    padding: viewport.$content-padding;
+}

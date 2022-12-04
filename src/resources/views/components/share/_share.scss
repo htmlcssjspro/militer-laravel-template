@@ -1,0 +1,16 @@
+@use '/resources/views/components/share/social';
+
+.share {
+    &_footer {
+    }
+
+    &__social {
+        &_footer {
+        }
+    }
+
+    &__title {
+        &_footer {
+        }
+    }
+}

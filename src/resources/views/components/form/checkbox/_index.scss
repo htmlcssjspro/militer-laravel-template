@@ -1,0 +1,84 @@
+@use 'sass:color';
+
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/position';
+
+$color: colors.$secondary;
+$active: $color;
+$bg: hsla(0, 0%, 85%, 1);
+$bg-disabled: color.grayscale($bg);
+
+.checkbox,
+.radio {
+    @extend %pos-r;
+
+    input {
+        @extend %pos-a;
+        visibility: hidden;
+        opacity: 0;
+        height: 0;
+        width: 0;
+    }
+
+    label {
+        cursor: pointer;
+    }
+}
+
+.checkbox {
+    // & + .checkbox {
+    //     margin-top: 1em;
+    // }
+
+    label {
+    }
+
+    input:checked + label {
+        background-color: colors.$active;
+    }
+
+    & + button[type='submit'] {
+        margin-top: 2em;
+    }
+}
+
+.radio {
+    & + .radio {
+        margin-top: 1em;
+    }
+
+    label {
+        padding-left: 2.6em;
+
+        &::before,
+        &::after {
+            content: '';
+            @extend %pos-a;
+            left: 0;
+            width: 1.6em;
+            height: 1.6em;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        &::before {
+            display: block;
+            background-color: colors.secondary();
+        }
+        &::after {
+            display: none;
+            border: 0.3em solid colors.secondary();
+            background-color: colors.$active;
+        }
+    }
+
+    &:hover input + label::before {
+        background-color: colors.hover(colors.$active);
+    }
+
+    input:checked + label::after {
+        display: block;
+    }
+}

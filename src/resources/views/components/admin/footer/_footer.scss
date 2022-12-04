@@ -1,0 +1,27 @@
+@use '/resources/scss/config';
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+
+@use '/resources/views/components/layout/footer';
+@use '/resources/views/components/logo';
+
+.footer {
+}
+
+.admin-footer {
+    grid-area: admin-aside;
+    background-color: colors.$bgc-gray;
+
+    @extend %font-size-12;
+
+    &__wrapper {
+        //
+    }
+
+    &__content {
+        //
+    }
+}

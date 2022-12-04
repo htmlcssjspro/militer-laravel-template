@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes +FollowSymLinks
+    </IfModule>
+
+    DirectoryIndex /public/index.php
+    RewriteEngine On
+    RewriteBase /
+    # Перенаправление всех запросов в папку public
+    # Eсли нет файла
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^(.*)$ public/$1 [L]
+
+</IfModule>

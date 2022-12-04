@@ -1,0 +1,42 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:color';
+
+@use '../config/colors';
+
+$gray-cool: (
+    50: hsla(210, 20%, 98%, 1),
+    100: hsla(220, 14%, 96%, 1),
+    200: hsla(220, 13%, 91%, 1),
+    300: hsla(216, 12%, 84%, 1),
+    400: hsla(218, 11%, 65%, 1),
+    500: hsla(220, 9%, 46%, 1),
+    600: hsla(215, 14%, 34%, 1),
+    700: hsla(217, 19%, 27%, 1),
+    800: hsla(215, 28%, 17%, 1),
+    900: hsla(221, 39%, 11%, 1),
+);
+
+// @function gray-cool($i: 600, $alpha: null) {
+@function gray-cool($i: 600) {
+    // $color: map.get($gray-cool, $i);
+    // @if $alpha >= 0 and $alpha <= 1 {
+    //     @return color.change($color, $alpha: $alpha);
+    // } @else {
+    //     @return $color;
+    // }
+
+    @return map.get($gray-cool, $i);
+}
+
+$color: gray-cool(900);
+$hex: colors.hex-str(gray-cool(900));
+@debug $color;
+
+$color: color.change($color, $alpha: 0.4);
+@debug $color;
+@debug colors.hsl-str($color);
+@debug colors.hsla-str($color);
+
+.test {
+}

@@ -1,0 +1,48 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/position';
+
+$white: text.$white;
+$accent: colors.$accent;
+$hover: colors.$theme-4;
+$active: colors.$theme-4;
+
+.link {
+    & {
+        color: $white;
+        transition: color 0.3s ease-in-out;
+    }
+
+    &:hover {
+    }
+
+    &:active,
+    &.active {
+    }
+
+    &_main-menu {
+        & {
+            padding: 1.5em;
+
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent;
+        }
+
+        &:hover {
+            color: $hover;
+        }
+
+        &:active,
+        &.active {
+            color: $active;
+            border-bottom-color: $active;
+        }
+
+        &.active {
+            &:hover {
+                color: $white;
+            }
+        }
+    }
+}

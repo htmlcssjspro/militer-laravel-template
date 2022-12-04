@@ -1,0 +1,28 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/text';
+
+.svg-symbol {
+    & {
+        width: 1.5em;
+        height: 1em;
+        @extend %vertical-align-middle;
+
+        fill: colors.$accent;
+    }
+
+    &_primary {
+        fill: colors.$accent;
+    }
+    &_white {
+        fill: colors.$white;
+    }
+    &_black {
+        fill: colors.$black;
+    }
+
+    &.xmark {
+        display: block;
+        width: 1em;
+    }
+}

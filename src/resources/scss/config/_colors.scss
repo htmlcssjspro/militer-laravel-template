@@ -1,0 +1,264 @@
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+
+//* Bootstrap
+$blue: hsl(216, 98%, 52%) !default;
+$indigo: hsl(263, 90%, 51%) !default;
+$purple: hsl(261, 51%, 51%) !default;
+$pink: hsl(330, 67%, 52%) !default;
+$red: hsl(354, 70%, 54%) !default;
+$orange: hsl(27, 98%, 54%) !default;
+$yellow: hsl(45, 100%, 51%) !default;
+$green: hsl(152, 69%, 31%) !default;
+$teal: hsl(162, 73%, 46%) !default;
+$cyan: hsl(190, 90%, 50%) !default;
+//* \Bootstrap
+
+$white: hsl(0, 0%, 100%);
+$snow: hsl(0, 0%, 99%);
+$white-smoke: hsl(0, 0%, 96%);
+$silver: hsl(0, 0%, 75%);
+$black: hsl(0, 0%, 0%);
+
+$gray-100: hsl(210, 10%, 90%);
+$gray-200: hsl(210, 10%, 80%);
+$gray-300: hsl(210, 10%, 70%);
+$gray-400: hsl(210, 10%, 60%);
+$gray-500: hsl(210, 10%, 50%);
+$gray-600: hsl(210, 10%, 40%);
+$gray-700: hsl(210, 10%, 30%);
+$gray-800: hsl(210, 10%, 20%);
+$gray-900: hsl(210, 10%, 10%);
+
+//* 0° Reds
+$light-coral: hsl(0, 100%, 75%);
+$red: hsl(0, 100%, 50%);
+$maroon: hsl(0, 100%, 25%);
+$orange-red: hsl(15, 100%, 50%);
+
+//* 30° Reds-Yellows (=Oranges)
+$macaroni-and-cheese: hsl(30, 100%, 75%);
+$orange: hsl(30, 100%, 50%);
+$saddle-brown: hsl(30, 100%, 25%);
+$amber: hsl(45, 100%, 50%);
+$gold: hsl(51, 100%, 50%);
+
+//* 60° Yellows
+$yellow: hsl(60, 100%, 50%);
+$olive: hsl(60, 100%, 25%);
+$electric-lime: hsl(75, 100%, 50%);
+
+//* 90° Yellow-Greens
+$chartreuse: hsl(90, 100%, 50%);
+$harlequin: hsl(105, 100%, 50%);
+
+//* 120° Greens
+$lime: hsl(120, 100%, 50%);
+$green: hsl(120, 100%, 25%);
+$malachite: hsl(135, 100%, 50%);
+
+//* 150° Green-Cyans
+$spring-green: hsl(150, 100%, 50%);
+$aquamarine: hsl(160, 100%, 75%);
+$medium-spring-green: hsl(165, 100%, 50%);
+
+//* 180° Cyans
+$cyan: hsl(180, 100%, 50%);
+$aqua: hsl(180, 100%, 50%);
+$teal: hsl(180, 100%, 25%);
+$deep-sky-blue: hsl(195, 100%, 50%);
+
+//* 210° Cyan-Blues
+$dodger-blue: hsl(210, 100%, 50%);
+$navy-blue: hsl(225, 100%, 50%);
+
+//* 240° blues
+$blue: hsl(240, 100%, 50%);
+$navy: hsl(240, 100%, 25%);
+$han-purple: hsl(255, 100%, 50%);
+
+//* 270° Blue-Magentas
+$dark-orchid: hsl(270, 50%, 50%);
+$indigo: hsl(275, 100%, 25%);
+$electric-purple: hsl(285, 100%, 50%);
+
+//* 300° Magentas
+$fuchsia: hsl(300, 100%, 50%);
+$magenta: hsl(300, 100%, 50%);
+$purple: hsl(300, 100%, 25%);
+$hot-magenta: hsl(315, 100%, 50%);
+
+//* 330° Magenta-Reds
+$deep-pink: hsl(330, 100%, 50%);
+$torch-red: hsl(345, 100%, 50%);
+
+@function hex-str($color) {
+    @return rgb($color, 1);
+}
+@function hsl-str($color) {
+    $hue: math.div(color.hue($color), 1deg);
+    $saturation: color.saturation($color);
+    $lightness: color.lightness($color);
+    @return unquote('hsl(#{$hue}, #{$saturation}, #{$lightness})');
+}
+@function hsla-str($color, $alpha: null) {
+    $hue: math.div(color.hue($color), 1deg);
+    $saturation: color.saturation($color);
+    $lightness: color.lightness($color);
+    $alpha: if(meta.type-of($alpha) == number and $alpha >= 0 and $alpha <= 1, $alpha, color.alpha($color));
+    @return unquote('hsla(#{$hue}, #{$saturation}, #{$lightness}, #{$alpha})');
+}
+@function lighten-color($color, $weight) {
+    @return mix(white, $color, $weight);
+}
+@function darken-color($color, $weight) {
+    @return mix(black, $color, $weight);
+}
+
+@function get-color($color, $i: 500) {
+    $tints: (
+        100: lighten-color($color, 80%),
+        200: lighten-color($color, 60%),
+        300: lighten-color($color, 40%),
+        400: lighten-color($color, 20%),
+        500: $color,
+        600: darken-color($color, 20%),
+        700: darken-color($color, 40%),
+        800: darken-color($color, 60%),
+        900: darken-color($color, 80%),
+        'white': lighten-color($color, 90%),
+        'black': darken-color($color, 90%),
+    );
+    @return map.get($tints, $i);
+}
+
+// @function red($i: 500) {
+//     @return get-color($red, $i);
+// }
+// @function orange($i: 500) {
+//     @return get-color($orange, $i);
+// }
+// @function yellow($i: 500) {
+//     @return get-color($yellow, $i);
+// }
+// @function green($i: 500) {
+//     @return get-color($green, $i);
+// }
+// @function cyan($i: 500) {
+//     @return get-color($cyan, $i);
+// }
+// @function blue($i: 500) {
+//     @return get-color($blue, $i);
+// }
+// @function magenta($i: 500) {
+//     @return get-color($magenta, $i);
+// }
+
+@function gray($i: 500) {
+    $gray-tinst: (
+        100: $gray-100,
+        200: $gray-200,
+        300: $gray-300,
+        400: $gray-400,
+        500: $gray-500,
+        600: $gray-600,
+        700: $gray-700,
+        800: $gray-800,
+        900: $gray-900,
+    );
+    @return map.get($gray-tinst, $i);
+}
+
+@function gray-tint($i: 500, $color: null) {
+    $gray: gray($i);
+    $hue: if($color, math.div(color.hue($color), 1deg), math.div(color.hue($gray), 1deg));
+    // $hue: math.div(color.hue($color), 1deg);
+    $color: color.change($gray, $hue: $hue, $saturation: 10%);
+    @return hsl-str($color);
+}
+
+@function hover($color) {
+    @return color.scale($color, $lightness: 20%);
+}
+
+//* theme colors
+
+$theme-1: hsl(259, 43%, 50%);
+$theme-2: hsl(255, 65%, 66%);
+$theme-3: hsl(231, 100%, 78%);
+$theme-4: hsl(207, 100%, 86%);
+
+$base-dark: $gray-800;
+$base-gray-dark: $gray-700;
+$base-gray: $gray-600;
+$base-gray-light: $gray-500;
+$base-light: $gray-400;
+
+$accent: $theme-1;
+$action: $theme-1;
+$active: $theme-1;
+
+$brand-1: $fuchsia;
+$brand-2: $cyan;
+
+$promo-yellow: $yellow;
+$promo-blue: $blue;
+$promo-green: $green;
+
+$info: $cyan;
+$success: $green;
+$warning: $yellow;
+$error: $red;
+$danger: $red;
+
+//* BackGround
+
+$bg-alpha: 0.4;
+
+@function bgc($color, $alpha: $bg-alpha) {
+    @return hsla-str($color, $alpha);
+}
+
+$bgc-dark: $gray-900;
+$bgc-gray: $gray-800;
+$bgc-light: $gray-700;
+
+$bgc-gray-dark: $gray-800;
+$bgc-gray-light: $gray-600;
+
+$bgc-dark-alpha: bgc($bgc-dark);
+$bgc-gray-dark-alpha: bgc($bgc-gray-dark);
+$bgc-gray-alpha: bgc($bgc-gray);
+$bgc-gray-light-alpha: bgc($bgc-gray-light);
+$bgc-light-alpha: bgc($bgc-light);
+
+$border: $gray-700;
+
+:root {
+    --info: #{$info};
+    --success: #{$success};
+    --warning: #{$warning};
+    --error: #{$error};
+    --danger: #{$danger};
+}
+
+// color.adjust($color, params); //
+//     Increases or decreases one or more properties of $color by fixed amounts.
+//     изменяет параметры на определенную величину
+// color.scale($color, params); //
+//     Fluidly scales one or more properties of $color.
+//     изменяет параметры на определенную величину относительно текущего значения
+//* color.change($color, params); //
+//     Sets one or more properties of a color to new values.
+//     устанавливает переданные параметры
+// params:
+//     $red: null, $green: null, $blue: null,
+//     $hue: null, $saturation: null, $lightness: null,
+//     $whiteness: null, $blackness: null,
+//     $alpha: null
+
+// color.complement($color);
+// color.invert($color);
+// color.grayscale($color);

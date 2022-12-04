@@ -1,0 +1,8 @@
+@use '/resources/views/components/layout/aside';
+
+.aside {
+}
+
+.admin-aside {
+    grid-area: admin-aside;
+}

@@ -1,0 +1,46 @@
+@use '/resources/scss/config';
+
+@mixin grid-area($name) {
+    grid-area: $name;
+}
+
+.grid {
+    display: grid;
+}
+
+%grid {
+    // example
+    $grid: &;
+
+    &-container {
+        @extend #{$grid};
+
+        &_simple {
+            @extend #{$grid};
+
+            gap: 61px 20px;
+            grid-template-columns: 345px 1fr 1fr;
+            grid-template-rows: 100px 1fr 100px;
+            grid-template: auto auto auto / auto auto auto;
+        }
+
+        &_areas {
+            @extend #{$grid};
+
+            grid-template-columns: repeat(3, minmax(auto, 345px));
+            grid-template-rows: 100px repeat(5, 1fr) 100px;
+            grid-template-areas:
+                'header header header'
+                'aside  main   main'
+                'footer footer footer';
+            grid-template:
+                'header header header' 100px
+                'aside  main   main' 1fr
+                'footer footer footer' 100px / repeat(3, minmax(auto, 345px));
+        }
+    }
+    &-element {
+        // example
+        @include grid-area(element);
+    }
+}

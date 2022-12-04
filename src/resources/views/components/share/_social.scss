@@ -1,0 +1,11 @@
+.social {
+    gap: 1em;
+
+    &_footer {
+    }
+
+    &__item {
+        &_footer {
+        }
+    }
+}

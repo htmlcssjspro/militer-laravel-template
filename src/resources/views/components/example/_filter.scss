@@ -1,0 +1,205 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+
+@use '/resources/scss/icons/svg-icons';
+@use '/resources/scss/icons/wot-png';
+
+@use '/resources/views/components/button/button';
+@use '/resources/views/components/form/checkbox';
+@use '/resources/views/components/form/double-range';
+@use '/resources/views/components/svg/symbol';
+
+%wrapper-top {
+    background: colors.$bg-grey;
+    box-shadow: colors.$box-shadow-grey;
+}
+
+.filter {
+    @extend %font-size-14;
+    background-color: colors.$bg-grey-dark;
+    border: 1px solid colors.$border-grey;
+
+    &__wrapper {
+        padding: 1em;
+    }
+
+    &__top {
+        @extend %wrapper-top;
+        height: 60px;
+
+        &.flex {
+            @extend %flex-sb-c;
+        }
+
+        span {
+            @extend %font-size-18;
+            color: colors.$primary;
+            text-shadow: colors.$text-shadow;
+        }
+    }
+
+    .flex,
+    .grid {
+        gap: 0.5em;
+    }
+
+    form {
+    }
+
+    fieldset {
+        legend {
+            @extend %font-size-16;
+            padding: 1em 0 0.5em;
+
+            &.flex {
+                @extend %flex-ai-c;
+                gap: 1em;
+            }
+        }
+    }
+
+    label {
+    }
+
+    .checkbox {
+        margin: 0;
+
+        &__label {
+            &.flex {
+                @extend %flex-ai-c;
+                gap: 1em;
+            }
+
+            min-width: 50px;
+            padding: 0.5em 0.75em;
+            background-color: colors.$bg-main;
+            border: 0.5px solid colors.$border-grey;
+            border-radius: 2px;
+        }
+
+        input:checked + label {
+            color: colors.$button;
+            background-color: colors.$button-bg;
+            box-shadow: colors.$box-shadow;
+
+            .svg-symbol {
+                fill: colors.$button;
+            }
+        }
+    }
+
+    .nation {
+        & > .flex {
+            @extend %flex-ai-c;
+            @extend %ff-r-w;
+        }
+    }
+
+    .level {
+        & > .flex {
+            @extend %flex-sb-c;
+            @extend %ff-r-w;
+        }
+    }
+
+    .v-type {
+        & > .flex {
+            @extend %flex-ai-c;
+            @extend %ff-r-w;
+
+            & > :nth-child(3) {
+                margin-right: 25%;
+            }
+        }
+    }
+
+    .task-type {
+        & > .flex {
+            @extend %flex-col-fs-fs;
+        }
+    }
+
+    .availability {
+        & > .flex {
+            @extend %flex-col-fs-fs;
+        }
+    }
+
+    .cost {
+        // legend.flex {
+        //     @extend %flex-ai-c;
+        //     gap: 1em;
+        // }
+    }
+    .duration {
+        & > .flex {
+            @extend %flex-col-fs-fs;
+        }
+    }
+    .prize {
+        & > .flex {
+            @extend %flex-ff-r-w;
+        }
+    }
+
+    .task-super {
+        & > .flex {
+            @extend %flex-col-fs-fs;
+        }
+    }
+
+    .form__submit {
+        margin-top: 3.2rem;
+        margin-bottom: 3.3rem;
+    }
+}
+
+.filters {
+    @extend %font-size-14;
+
+    &__wrapper {
+        padding: 1em;
+    }
+
+    &__top {
+        @extend %wrapper-top;
+        min-height: 60px;
+        border-radius: 5px;
+
+        &.flex {
+            @extend %flex-ai-c;
+            @extend %flex-ff-r-w;
+        }
+    }
+
+    .flex,
+    .grid {
+        gap: 0.5em;
+    }
+}
+
+.filter-tag {
+    &.flex {
+        @extend %flex-ai-c;
+        gap: 1em;
+    }
+
+    min-width: 50px;
+    padding: 0.5em 0.75em;
+    color: colors.$button;
+    background-color: colors.$button-bg;
+    box-shadow: colors.$box-shadow;
+    border: 0.5px solid colors.$border-grey;
+    border-radius: 2px;
+
+    .svg-symbol {
+        fill: colors.$button;
+
+        &.xmark {
+            width: 0.85em;
+            height: 0.85em;
+        }
+    }
+}

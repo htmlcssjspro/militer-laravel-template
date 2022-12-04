@@ -1,0 +1,145 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/shadow';
+
+.double-range {
+    &__labels {
+        &.flex {
+            @extend %flex-ai-c;
+        }
+    }
+
+    &__label {
+        width: 4em;
+        @extend .ta-c;
+    }
+
+    &__inputs {
+        $track-thick: 6px;
+        $track-color: colors-$accent;
+
+        $thumb-size: 18px;
+        $thumb-color: colors-$accent;
+
+        $bg-thick: 6px;
+        $bg-color: colors.$bgc-dark;
+
+        $rounded: false;
+
+        --thumb-size: #{$thumb-size};
+        --track-left: 0%;
+        --track-right: 0%;
+
+        @mixin border-radius($br) {
+            @if $rounded {
+                border-radius: $br;
+            }
+        }
+
+        @extend %flex-col-c;
+
+        position: relative;
+        height: $thumb-size;
+        margin: $thumb-size 0;
+        padding: $thumb-size 0;
+        @include border-radius($thumb-size);
+        background-color: transparent;
+
+        &::before,
+        &::after {
+            content: '';
+            position: absolute;
+
+            // top: 50%;
+            // transform: translateY(-50%);
+        }
+
+        &::before {
+            left: 3px;
+            right: 3px;
+
+            height: $bg-thick;
+            background-color: $bg-color;
+            @include border-radius($bg-thick);
+        }
+
+        &::after {
+            left: var(--track-left);
+            right: var(--track-right);
+
+            height: $track-thick;
+            border-radius: $track-thick;
+            background-color: $track-color;
+        }
+
+        @mixin common {
+            -webkit-appearance: none;
+               -moz-appearance: none;
+                    appearance: none;
+            outline: none;
+            border: none;
+        }
+
+        input[type='range'] {
+            @include common();
+
+            position: absolute;
+            left: 0;
+            right: 0;
+            z-index: 10;
+
+            // top: 50%;
+            // transform: translateY(-50%);
+
+            display: block;
+            // overflow: hidden;
+            width: 100%;
+            height: $thumb-size;
+            margin: 0;
+            padding: 0;
+            pointer-events: all;
+            cursor: pointer;
+            background-color: transparent;
+            @include border-radius($thumb-size);
+
+            @mixin track {
+                @include common();
+                height: $thumb-size;
+                background-color: transparent;
+                @include border-radius($thumb-size);
+            }
+
+            @mixin thumb {
+                @include common();
+                width: $thumb-size;
+                height: $thumb-size;
+
+                border: 3.6px solid colors.$bgc-dark;
+                border-radius: 50%;
+
+                background-color: $thumb-color;
+                @extend %shadow-lg;
+                @extend %filter-drop-shadow;
+            }
+
+            &::-webkit-slider-runnable-track {
+                @include track();
+            }
+            &::-webkit-slider-thumb {
+                @include thumb();
+            }
+
+            &::-moz-range-track {
+                @include track();
+            }
+            &::-moz-range-thumb {
+                @include thumb();
+            }
+            &::-moz-focus-outer {
+                border: 0;
+            }
+        }
+    }
+}

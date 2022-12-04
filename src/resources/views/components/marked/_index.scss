@@ -1,0 +1,43 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/position';
+@use '/resources/scss/common/indent';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/shadow';
+
+$bglg: linear-gradient(90deg, hsla(41, 100%, 55%, 0.2) 55%, hsla(41, 100%, 55%, 0));
+
+.marked_block {
+    @extend %pos-r;
+    @extend %flex-col-sb-fs;
+
+    padding: 1em 1.5em;
+    border-left: 4px solid colors.$accent;
+    background: $bglg;
+
+    &_green {
+        border-left-color: hsla(115, 100%, 65%, 1);
+    }
+
+    & > :nth-child(1) {
+        @extend %font-size-16;
+        margin-bottom: 1em;
+    }
+    & > :nth-child(2) {
+        @extend %font-size-20;
+    }
+
+    & > .svg-symbol:last-child {
+        @include position.corner(bottom, right, 8px);
+        width: 38px;
+        height: 38px;
+        @extend %filter-drop-shadow;
+    }
+}
+
+.marked_span {
+    @extend %font-size-18;
+    @extend %font-weight-700;
+    @extend %pading-span;
+}

@@ -1,0 +1,258 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/grid';
+@use '/resources/scss/common/indent';
+@use '/resources/scss/common/shadow';
+
+@use '/resources/views/components/article/article';
+@use '/resources/views/components/marked';
+@use '/resources/views/components/form/form';
+
+@use '/resources/views/components/svg/symbol';
+
+.admin {
+    .page-container {
+        font-size: 2rem;
+        background: url(../images/admin/bg/bg-admin.jpg) center/cover no-repeat;
+
+        & > .wrapper.grid {
+            grid-template: 'admin-aside main' 1fr / 345px 1fr;
+        }
+    }
+
+    .aside {
+    }
+
+    .main {
+        background-color: colors.$bgc-gray;
+
+        & > .wrapper {
+            padding: 1em;
+        }
+    }
+}
+
+.admin-header {
+    background-color: colors.$bgc-dark;
+    border: 1px solid colors.$border;
+
+    &__wrapper {
+        &.flex {
+            @extend %flex-sb-c;
+        }
+    }
+}
+
+.admin-footer {
+    background-color: colors.$bgc-dark;
+    border: 1px solid colors.$border;
+
+    &__wrapper {
+        &.flex {
+            @extend %flex-sb-c;
+        }
+    }
+}
+
+.admin-aside {
+    @extend %font-size-18;
+
+    ul li {
+    }
+
+    .link {
+        background: colors.$bgc-dark;
+        border: 1px solid colors.$border;
+
+        &.active {
+            @extend .marked_block;
+            color: colors.$accent;
+        }
+    }
+}
+
+.admin-main {
+}
+
+.admin-finance {
+    &__main {
+    }
+
+    .admin-main {
+        &__wrapper {
+            & > .grid {
+                gap: 3rem;
+                grid-template: auto / repeat(3, 1fr);
+            }
+
+            & > .flex {
+                @extend %flex-sb-fs;
+                gap: 3rem;
+                margin-top: 10rem;
+            }
+        }
+    }
+}
+
+.admin-referral {
+}
+
+.admin-battles {
+    &.page-container {
+        & > .wrapper.grid {
+            grid-template: 'admin-aside main filter' 1fr / 345px 1fr 345px;
+        }
+    }
+
+    .admin-main {
+        &__wrapper {
+            padding: 1em;
+
+            &.grid {
+                gap: 20px;
+                grid-template: auto / repeat(3, 1fr);
+            }
+        }
+    }
+}
+
+.battle-create,
+.battle-edit {
+    .main {
+        &__content {
+            @extend %font-size-18;
+            padding: 3rem 5rem 8rem;
+        }
+    }
+
+    .form {
+        max-width: 918px;
+        margin: 0 auto;
+
+        &-image {
+            .flex {
+                gap: 20px;
+                @extend %flex-fs-c;
+            }
+        }
+
+        &__bottom {
+            .flex {
+                gap: 20px;
+            }
+        }
+    }
+
+    fieldset {
+        @extend .my-1;
+        &:first-of-type {
+            margin-top: 0;
+        }
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        & > .flex {
+            @extend %flex-sb-c;
+        }
+
+        &.form-nation {
+            & > .flex {
+                gap: 1em 0.5em;
+                @extend %flex-ff-r-w;
+            }
+        }
+    }
+
+    input[type='text'],
+    input[type='date'],
+    input[type='time'],
+    input[type='datetime-local'],
+    textarea,
+    select,
+    option {
+        min-width: 420px;
+        @extend .p-cell;
+        background-color: colors.$bgc-dark;
+
+        border: 1px solid colors.$accent;
+        border-radius: 2px;
+
+        &:hover {
+            border-color: colors.$white;
+            @extend %shadow-lg;
+        }
+    }
+
+    legend {
+        @extend .my-05;
+    }
+
+    .label-value {
+        @extend .my-05;
+        border-radius: 2px;
+    }
+
+    .label-file {
+        @extend %pos-r;
+        @extend %flex-ai-c;
+        gap: 1em;
+
+        cursor: pointer;
+
+        &__img {
+            @extend %flex-c;
+            width: 147px;
+            height: 104px;
+            background-color: colors.$bg-dark;
+            border: 1px dashed colors.$white;
+            border-radius: 2px;
+            background: center/cover no-repeat;
+            overflow: hidden;
+
+            &:hover {
+                @extend %shadow-lg;
+            }
+
+            .plus {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
+        &__filename {
+        }
+    }
+
+    .checkbox {
+        @extend .m-0;
+
+        &__label {
+            &.flex {
+                @extend %flex-ai-c;
+                gap: 1em;
+            }
+
+            min-width: 50px;
+            padding: 0.5em 0.75em;
+            background-color: colors.$bgc-dark;
+            border: 0.5px solid colors.$border;
+            border-radius: 2px;
+
+            &:hover {
+                @extend %shadow-lg;
+            }
+        }
+
+        input:checked + label {
+            color: text.$color;
+            background-color: colors.$active;
+            @extend %shadow-lg;
+
+            .svg-symbol {
+                fill: text.$color;
+            }
+        }
+    }
+}

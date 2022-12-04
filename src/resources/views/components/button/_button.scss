@@ -1,0 +1,133 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/indent';
+@use '/resources/scss/common/shadow';
+
+$color: text.$white;
+$bgc: colors.$action;
+$border-color: colors.$border;
+
+$color-hover: $color;
+$bgc-hover: $bgc;
+$border-color-hover: $border-color;
+
+$color-active: $color;
+$bgc-active: $bgc;
+$border-color-active: $border-color;
+
+$color-disabled: text.$disabled;
+$bgc-disabled: colors.gray();
+$border-disabled: colors.gray();
+
+.btn {
+    & {
+        width: -webkit-fit-content;
+        width: -moz-fit-content;
+        width: fit-content;
+        border-radius: 4px;
+    }
+
+    &_common {
+        & {
+            color: $color;
+            padding: 1em 1.25em;
+            background-color: $bgc;
+            @extend %shadow-lg;
+        }
+
+        &:hover {
+            color: $color-hover;
+            background-color: $bgc-hover;
+        }
+
+        &:active {
+            color: $color-active;
+            background-color: $bgc-active;
+        }
+
+        &:disabled {
+            background-color: $bgc-disabled;
+            -o-border-image: none;
+            border-image: none;
+            border-color: $border-disabled;
+        }
+    }
+
+    &_main {
+        & {
+            padding: 0.5em 1em;
+            color: $color;
+            border: 1px solid;
+            border-image-slice: 1;
+            border-image-source: linear-gradient(180deg, hsl(41, 97%, 54%) 0%, hsl(16, 88%, 50%) 100%);
+            background: linear-gradient(180deg, hsl(27, 98%, 50%) -32.61%, hsl(11, 85%, 36%) 100%);
+        }
+
+        &:hover {
+            color: $color;
+        }
+        &:active {
+        }
+        &:disabled {
+        }
+    }
+
+    &_danger {
+        color: $color;
+        background: linear-gradient(180deg, hsl(27, 98%, 50%) -32.61%, hsl(11, 85%, 36%) 100%);
+
+        &:hover {
+            color: $color;
+        }
+        &:active {
+        }
+        &:disabled {
+        }
+    }
+
+    &_tab {
+        font-size: 1.8rem;
+        color: hsla(0, 0%, 100%, 0.4);
+        background: colors.$bgc-gray;
+        border: 1px solid colors.$border;
+        border-bottom: 2px solid transparent;
+        border-radius: 5px 5px 0px 0px;
+
+        &:hover {
+            color: $color-hover;
+            background-color: $bgc-hover;
+            @extend %shadow-lg;
+        }
+
+        &:active,
+        &.active {
+            color: $color-active;
+            background-color: $bgc-active;
+            border-bottom-color: $bgc;
+        }
+
+        &:disabled {
+        }
+    }
+
+    &_right {
+        margin-left: auto;
+    }
+    &_left {
+        margin-right: auto;
+    }
+    &_center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &_full {
+        width: 100%;
+    }
+
+    &_cell {
+        @extend .p-cell;
+    }
+}

@@ -1,0 +1,202 @@
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/grid';
+@use '/resources/scss/common/position';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/indent';
+
+@use '/resources/views/components/modal';
+@use '/resources/views/components/marked';
+@use '/resources/views/components/svg/symbol';
+
+.battles {
+    .page-container {
+    }
+
+    .aside {
+    }
+
+    .main {
+        &__content {
+        }
+    }
+}
+
+.battles-show {
+    @extend %font-size-18;
+
+    &__main {
+        .main {
+            &__content {
+                &.grid {
+                    gap: 16px 20px;
+                    grid-template: repeat(5, auto) / repeat(4, minmax(auto, 345px));
+                }
+            }
+        }
+    }
+}
+
+.battle-show {
+    @extend %font-size-18;
+    min-height: 933px;
+
+    &.page-container {
+        background: url(../images/battles/bg-battle-show.jpg) center/cover no-repeat;
+    }
+
+    &__main {
+    }
+
+    .main {
+        &__content {
+            padding-left: 122px;
+        }
+
+        &__top {
+            @extend %position-relative;
+
+            .flex {
+                gap: 1em;
+                @extend %flex-sb-c;
+            }
+
+            .back {
+                @extend %position-corner-top-left;
+            }
+
+            .arrow-left {
+                width: 39px;
+                height: 7em;
+            }
+
+            .title {
+                padding-top: 2em;
+                padding-bottom: 1em;
+            }
+
+            .description {
+            }
+        }
+
+        &__center {
+            margin-top: 105px;
+            margin-bottom: 152px;
+            padding-right: 122px;
+
+            &.grid {
+                // gap: 2rem;
+                gap: 81px 152px;
+                grid-template: auto / repeat(3, 1fr);
+            }
+
+            /*
+            &.flex {
+                gap: viewport.$gap;
+                @extend %flex-sb-fs;
+
+                div:first-child {
+                    flex: 1 1;
+                }
+                div:last-child {
+                    flex: 0 1 345px;
+                }
+            }
+             */
+        }
+
+        &__bottom {
+        }
+    }
+
+    .table {
+        .table__hdata:nth-child(1),
+        .table__data:nth-child(1) {
+            flex-basis: 10%;
+        }
+        .table__hdata:nth-child(2),
+        .table__data:nth-child(2),
+        .table__hdata:nth-child(4),
+        .table__data:nth-child(4) {
+            flex-basis: 30%;
+        }
+        .table__hdata:nth-child(3),
+        .table__data:nth-child(3) {
+            flex-basis: 15%;
+        }
+    }
+
+    img.position {
+        display: inline-block;
+
+        &-1 {
+            width: 16px;
+            height: 15px;
+        }
+        &-2 {
+            width: 16px;
+            height: 15px;
+        }
+        &-3 {
+            width: 15px;
+            height: 15px;
+        }
+    }
+}
+
+.battle-article {
+    .article {
+        &__background {
+        }
+
+        &__overlay {
+        }
+
+        &__content {
+        }
+
+        &__header,
+        &__main,
+        &__footer {
+        }
+
+        &__header {
+        }
+
+        &__main {
+        }
+
+        &__footer {
+        }
+    }
+}
+
+.battle-join.modal {
+    &.show {
+    }
+
+    .modal {
+        &__content {
+            padding: viewport.$gap;
+            background-color: colors.$bgc-dark;
+            border-radius: 5px;
+        }
+
+        &__header {
+            @extend %flex-sb;
+        }
+        &__body {
+        }
+        &__footer {
+            @extend %flex-sb;
+        }
+
+        &__close {
+        }
+
+        &__overlay {
+        }
+    }
+}

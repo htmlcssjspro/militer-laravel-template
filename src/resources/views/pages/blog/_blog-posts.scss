@@ -1,0 +1,35 @@
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/grid';
+@use '/resources/scss/common/text';
+
+.blog-posts {
+    .main {
+        @extend %font-size-14;
+
+        &__content {
+        }
+
+        &__wrapper {
+        }
+    }
+
+    .aside {
+        @extend %font-size-14;
+    }
+}
+
+.blog-post {
+    .main {
+        @extend %font-size-14;
+
+        &__content {
+        }
+
+        &__wrapper {
+        }
+    }
+
+    .aside {
+        @extend %font-size-14;
+    }
+}

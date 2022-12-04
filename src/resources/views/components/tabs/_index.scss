@@ -1,0 +1,15 @@
+@use '/resources/scss/config/colors';
+
+$bg: linear-gradient(0deg, hsla(41, 100%, 55%, 0.2) 55%, hsla(41, 100%, 55%, 0));
+$bg-hover: linear-gradient(0deg, hsla(41, 100%, 55%, 0.2) 55%, hsla(41, 100%, 55%, 0));
+$bg-active: linear-gradient(0deg, hsla(41, 100%, 55%, 0.2) 55%, hsla(41, 100%, 55%, 0));
+
+.tab-btn {
+}
+
+.tab-content {
+    display: none;
+    &.active {
+        display: block;
+    }
+}

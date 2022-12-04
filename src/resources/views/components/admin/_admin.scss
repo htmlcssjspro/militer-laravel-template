@@ -1,0 +1,42 @@
+@use '/resources/scss/common/normalize';
+
+@use '/resources/scss/config/font-face';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/grid';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/position';
+@use '/resources/scss/common/scrollbar';
+
+@use '/resources/views/components/layout';
+
+@use '/resources/views/components/admin';
+@use '/resources/views/components/admin/main';
+@use '/resources/views/components/admin/aside';
+@use '/resources/views/components/admin/footer';
+
+.body {
+    min-height: 100vh;
+    font-family: '#{font-face.$family}', sans-serif;
+    color: text.$white;
+    background-color: colors.$bgc-gray;
+
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+
+    &.flex {
+        @extend %flex-col-fs-c;
+    }
+
+    &.grid {
+        grid-template:
+            'header' auto
+            'page-container' 1fr
+            'footer' auto / 1fr;
+    }
+
+    &.scrollbar {
+        @extend %scrollbar;
+    }
+}

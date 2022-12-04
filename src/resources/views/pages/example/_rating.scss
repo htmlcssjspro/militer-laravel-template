@@ -1,0 +1,87 @@
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/indent';
+@use '/resources/scss/common/text';
+
+@use '/resources/scss/icons/svg-icons';
+
+@use '/resources/views/components/table';
+
+.raiting {
+    &.page-container {
+        @extend %font-size-20;
+    }
+
+    .page {
+        &__top {
+            &.flex {
+                gap: 28px;
+                @extend %flex-ai-bl;
+            }
+        }
+    }
+
+    .dropdown {
+        &__toggle {
+            @extend %svg-arrow-down_right-big;
+        }
+
+        &__content {
+            @extend %font-size-14;
+            background-color: colors.$bgc-gray;
+            border-radius: 2px;
+        }
+
+        &__item {
+            button.active {
+                color: colors.$active;
+            }
+        }
+
+        & > .navbar__list {
+            @extend %flex-sa-c;
+        }
+    }
+
+    .table {
+        max-width: 1196px;
+        margin: 0 auto;
+
+        .table__hdata:nth-child(1),
+        .table__data:nth-child(1) {
+            text-align: center;
+            flex-basis: 10%;
+        }
+        .table__hdata:nth-child(2),
+        .table__data:nth-child(2) {
+            flex-basis: 40%;
+        }
+        .table__hdata:nth-child(3),
+        .table__data:nth-child(3) {
+            flex-basis: 25%;
+        }
+        .table__hdata:nth-child(4),
+        .table__data:nth-child(4) {
+            flex-basis: 25%;
+        }
+    }
+
+    img.position {
+        display: inline-block;
+
+        &-1 {
+            width: 27px;
+            height: 27px;
+        }
+        &-2 {
+            width: 16px;
+            height: 15px;
+        }
+        &-3 {
+            width: 15px;
+            height: 15px;
+        }
+    }
+}

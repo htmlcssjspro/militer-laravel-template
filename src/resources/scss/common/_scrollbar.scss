@@ -1,0 +1,50 @@
+@use 'sass:color';
+@use 'sass:math';
+
+@use '/resources/scss/config/colors';
+
+$scrollbar-track-bgc: colors.$gray-500;
+$scrollbar-track-shadow-color: colors.$gray-900;
+
+$scrollbar-thumb-bgc: colors.$action;
+$scrollbar-thumb-shadow-color: colors.$action;
+
+$scrollbar-width: 8px;
+$scrollbar-radius: math.div($scrollbar-width, 2);
+
+%scrollbar {
+    & {
+        /* auto | thin | none */
+        scrollbar-width: thin;
+        /* scrollbar-color: thumb-color track-color; */
+        scrollbar-color: $scrollbar-thumb-bgc $scrollbar-track-bgc;
+    }
+
+    &::-webkit-scrollbar {
+        width: $scrollbar-width;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: $scrollbar-track-bgc;
+        border-radius: $scrollbar-radius;
+        box-shadow: inset 0 0 $scrollbar-radius $scrollbar-track-shadow-color;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $scrollbar-thumb-bgc;
+        border-radius: $scrollbar-radius;
+        box-shadow: 0 0 1px $scrollbar-thumb-shadow-color;
+    }
+
+    &::-webkit-scrollbar-track-piece {
+    }
+
+    &::-webkit-scrollbar-button {
+    }
+
+    &::-webkit-scrollbar-corner {
+    }
+
+    &::-webkit-resizer {
+    }
+}

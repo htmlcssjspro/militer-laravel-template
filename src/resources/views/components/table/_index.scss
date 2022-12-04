@@ -1,0 +1,73 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/indent';
+
+$bgc: colors.$bgc-gray;
+$border: 1px solid colors.$border;
+
+.table {
+    width: 100%;
+    @extend %font-size-14;
+
+    &__row {
+        @extend %flex-sb-c;
+        min-height: 5rem;
+        border: $border;
+    }
+
+    &__data {
+        @extend %padding-cell;
+    }
+
+    &__head {
+    }
+    &__head &__row {
+        border: none;
+    }
+    &__head &__data {
+    }
+
+    &__foot {
+    }
+    &__foot &__row {
+    }
+    &__foot &__data {
+    }
+
+    &__body {
+        background-color: $bgc;
+        // border-radius: 5px;
+        overflow: hidden;
+
+        &.scroll {
+            max-height: 50rem;
+            overflow-y: scroll;
+
+            $scrollbar-width: 8px;
+
+            margin-right: -$scrollbar-width;
+
+            scrollbar-width: thin;
+            /* auto | thin | none */
+            scrollbar-color: colors.$scrollbar-thumb colors.$scrollbar-track;
+            /* scrollbar-color: thumb-color track-color; */
+
+            &::-webkit-scrollbar {
+                width: $scrollbar-width;
+            }
+            &::-webkit-scrollbar-track {
+                background-color: colors.$scrollbar-track;
+                border-radius: $scrollbar-width;
+                // box-shadow: inset 0 0 $scrollbar-width colors.$scrollbar-track;
+            }
+            &::-webkit-scrollbar-thumb {
+                background-color: colors.$scrollbar-thumb;
+                box-shadow: colors.$box-shadow;
+                border-radius: $scrollbar-width;
+                // box-shadow: inset 0 0 $scrollbar-width colors.$scrollbar-thumb;
+            }
+        }
+    }
+}

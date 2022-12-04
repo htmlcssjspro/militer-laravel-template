@@ -1,0 +1,6 @@
+@use '/resources/scss/common/position';
+
+.test {
+    @extend %position-fixed-top;
+    width: fit-content;
+}

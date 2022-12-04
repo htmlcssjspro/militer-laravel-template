@@ -1,0 +1,38 @@
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+
+.auth-form {
+    @extend %font-size-20;
+
+    input {
+        color: text.$black;
+
+        &:focus-visible {
+            outline: 1px auto colors.$accent;
+        }
+    }
+    width: 40rem;
+    margin: viewport.$gap auto;
+
+    .form__errors + label,
+    label + label {
+        margin-top: 2em;
+    }
+
+    label.flex {
+        gap: 1em;
+        @extend %flex-ai-c;
+    }
+
+    .form__submit {
+        margin-top: 3.5rem;
+        margin-bottom: 2.5rem;
+
+        &.flex {
+            @extend %flex-sb;
+        }
+    }
+}

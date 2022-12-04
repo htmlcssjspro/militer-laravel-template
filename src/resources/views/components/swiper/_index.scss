@@ -1,0 +1,19 @@
+@use '/resources/scss/config/colors';
+
+@use 'swiper-core';
+@use 'swiper-navigation';
+
+.swiper {
+    --swiper-theme-color: var(--color-primary);
+
+    // --swiper-navigation-size: 44px;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    // color: colors.$accent;
+}
+.swiper-button-prev {
+}
+.swiper-button-next {
+}

@@ -1,0 +1,40 @@
+@use '/resources/scss/config';
+@use '/resources/scss/config/viewport';
+
+.container {
+    max-width: viewport.$container-max-width;
+    min-width: viewport.$content-min-width;
+    width: 100%;
+    @if config.$CONTAINER_GAP {
+        margin: viewport.$container-gap auto;
+    } @else {
+        margin: viewport.$container-margin;
+    }
+    padding: viewport.$container-padding;
+
+    &-first,
+    &:first-of-type {
+        @if config.$CONTAINER_GAP {
+            margin-top: 0;
+        }
+    }
+    &-last,
+    &:last-of-type {
+        @if config.$CONTAINER_GAP {
+            margin-bottom: 0;
+        }
+    }
+
+    .container {
+        margin: 0;
+    }
+}
+
+.page-container {
+    grid-area: page-container;
+    padding-bottom: viewport.$container-gap;
+
+    @at-root .body.flex > & {
+        flex-grow: 1;
+    }
+}

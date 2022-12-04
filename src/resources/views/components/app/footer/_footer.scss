@@ -1,0 +1,17 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/views/components/navbar/navbar';
+@use '/resources/views/components/logo/logo';
+@use '/resources/views/components/share/share';
+
+.footer {
+    & {
+        background-color: colors.$bgc-light;
+    }
+
+    &__wrapper {
+    }
+
+    &__content {
+    }
+}

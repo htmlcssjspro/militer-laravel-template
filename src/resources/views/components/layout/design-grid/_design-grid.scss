@@ -1,0 +1,65 @@
+@use '/resources/assets/scss/config';
+@use '/resources/assets/scss/config/viewport';
+@use '/resources/assets/scss/common/grid';
+@use '/resources/assets/scss/common/flex';
+@use '/resources/assets/scss/common/position';
+@use 'sass:math';
+
+@if config.$DEV and config.$DESIGN_GRID {
+    $gap: 20px;
+    $margin: math.div($gap, 2);
+    $bg: hsla(300, 80%, 80%, 0.3);
+
+    .design-grid {
+        & {
+            @extend %position-fixed-full;
+            max-width: viewport.$content-max-width;
+            margin: viewport.$wrapper-margin;
+            height: 0;
+            overflow: visible;
+            z-index: 1000;
+            z-index: -1;
+        }
+
+        &__wrapper {
+            @extend %flex-sb;
+            gap: $gap;
+            // margin: 0 (-$margin);
+            // position: relative;
+        }
+
+        &__col {
+            flex: 1 1;
+            // margin: 0 $margin;
+            position: relative;
+
+            height: 100vh;
+            background-color: $bg;
+        }
+
+        &__line {
+            & {
+                position: absolute;
+                width: 1px;
+                height: 100vh;
+                background-color: blue;
+            }
+
+            $line: &;
+
+            &_left {
+                @extend #{$line};
+                left: 0;
+            }
+
+            &_right {
+                @extend #{$line};
+                right: 0;
+            }
+        }
+    }
+} @else if config.$DEV {
+    .design-grid {
+        display: none;
+    }
+}

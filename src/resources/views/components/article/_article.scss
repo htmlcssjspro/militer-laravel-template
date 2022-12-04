@@ -1,0 +1,67 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/position';
+@use '/resources/scss/common/display';
+@use '/resources/scss/common/width';
+
+$padding: 16px;
+
+.article {
+    @extend %pos-r;
+
+    // max-width: 345px;
+
+    color: text.$white;
+    // background: colors.$bg-grey-dark;
+    border: 1px solid colors.$border;
+    border-radius: 5px;
+    overflow: hidden;
+    z-index: 10;
+
+    &__background {
+        @extend %pos-a-full;
+        z-index: -1;
+
+        img {
+            height: 100%;
+        }
+    }
+
+    &__overlay {
+        @extend %pos-a-full;
+        z-index: -1;
+    }
+
+    &__content {
+        min-height: 264px;
+        background: colors.$bgc-dark;
+        // padding: $padding;
+
+        &.flex {
+            @extend %flex-col-sb-fs;
+        }
+    }
+
+    &__header,
+    &__main,
+    &__footer {
+        @extend %width-100;
+        padding: $padding;
+    }
+
+    &__header {
+        @extend %flex-row-sb-c;
+        border-bottom: 1px solid;
+        border-image-slice: 0 0 1 0;
+        border-image-source: linear-gradient(90deg, hsl(40, 100%, 50%) 50%, hsla(47, 100%, 50%, 0) 80%);
+    }
+
+    &__main {
+    }
+
+    &__footer {
+        @extend %flex-row-sb-c;
+    }
+}

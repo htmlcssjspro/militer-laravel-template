@@ -1,0 +1,35 @@
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/position';
+
+.modal {
+    display: none;
+    @extend %position-fixed-full;
+
+    &.show {
+        @extend %flex-c;
+        z-index: 1;
+    }
+
+    &__content {
+    }
+
+    &__header {
+    }
+    &__body {
+    }
+    &__footer {
+    }
+
+    &__close {
+        padding: 1em;
+    }
+
+    &__overlay {
+        @extend %position-absolute-full;
+        background-color: colors.$bgc-gray;
+        z-index: -1;
+    }
+}

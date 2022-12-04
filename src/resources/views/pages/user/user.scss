@@ -1,0 +1,278 @@
+@use '/resources/scss/config/viewport';
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+@use '/resources/scss/common/text';
+@use '/resources/scss/common/indent';
+
+@use '/resources/views/components/tabs';
+@use '/resources/views/components/marked';
+@use '/resources/views/components/form/checkbox';
+
+.user {
+    .page-container {
+    }
+
+    .aside {
+    }
+
+    .main {
+        &__content {
+            padding: viewport.$gap;
+            background-color: colors.$bgc-gray;
+            border: 1px solid colors.$border;
+            border-radius: 0px 0px 5px 5px;
+        }
+    }
+}
+
+.user-aside {
+    @extend %font-size-18;
+
+    .navbar {
+        &.flex {
+            @extend %flex-sb;
+        }
+
+        &__list {
+            &.actions {
+                gap: 2em;
+                @extend %flex-ai-c;
+            }
+        }
+
+        &__item {
+            &.balance {
+                &.flex {
+                    gap: 0.5em;
+                    @extend %flex-ai-c;
+                }
+            }
+        }
+    }
+}
+
+.user-main {
+    @extend %font-size-18;
+
+    .total {
+        @extend %flex-ai-c;
+        gap: 1em;
+        margin-bottom: viewport.$gap;
+    }
+}
+
+.user-profile {
+    &.page-container {
+        background: url(../images/user/bg-stats.png) center/cover no-repeat;
+    }
+
+    &__aside {
+        .nav {
+            &.flex {
+                @extend %flex-sb;
+            }
+        }
+    }
+
+    &__main {
+        .user-stats {
+            & > .grid {
+                gap: viewport.$gap;
+                grid-auto-flow: column;
+                // grid-template: auto auto / repeat(5, minmax(180px, max-content));
+                grid-template: auto auto / repeat(5, 1fr);
+            }
+        }
+
+        .user-battles {
+            & > .flex {
+                @extend %flex-sb-fs;
+            }
+
+            &__active,
+            &__archive {
+                flex: 1 1 50%;
+
+                &.flex {
+                    gap: 3rem;
+                    @extend %flex-col-fs-c;
+                }
+            }
+
+            &__active {
+                .table {
+                    max-width: 530px;
+
+                    .table__hdata:nth-child(1),
+                    .table__data:nth-child(1) {
+                        flex-basis: 40%;
+                    }
+                    .table__hdata:nth-child(2),
+                    .table__data:nth-child(2) {
+                        flex-basis: 30%;
+                    }
+                    .table__hdata:nth-child(3),
+                    .table__data:nth-child(3) {
+                        flex-basis: 30%;
+                    }
+                }
+            }
+            &__archive {
+                .table {
+                    max-width: 530px;
+
+                    .table__hdata:nth-child(1),
+                    .table__data:nth-child(1) {
+                        flex-basis: 40%;
+                    }
+                    .table__hdata:nth-child(2),
+                    .table__data:nth-child(2) {
+                        flex-basis: 30%;
+                    }
+                    .table__hdata:nth-child(3),
+                    .table__data:nth-child(3) {
+                        flex-basis: 15%;
+                    }
+                    .table__hdata:nth-child(4),
+                    .table__data:nth-child(4) {
+                        flex-basis: 15%;
+                    }
+                }
+            }
+
+            &__img {
+                height: 137px;
+            }
+        }
+
+        .user-referral {
+            & > .flex {
+                @extend %flex-sb-fs;
+
+                & > div {
+                    flex: 1 1 50%;
+                }
+            }
+
+            &__left,
+            &__right {
+                flex: 1 1 50%;
+
+                &.flex {
+                    gap: 1em;
+                    @extend %flex-col-fs-c;
+                }
+            }
+
+            table {
+                width: 445px;
+            }
+            tr td:last-child {
+                width: 25%;
+            }
+        }
+    }
+}
+
+.buy-gold {
+    &.page-container {
+        @extend %font-size-20;
+        padding-top: 144px;
+        background: url(../images/user/bg-buy-gold-right-top.png) right top / auto 346px no-repeat,
+            url(../images/user/bg-buy-gold-left-bottom.png) left bottom 187px / auto 346px no-repeat,
+            url(../images/user/bg-buy-gold-right-bottom.png) right bottom 29px / auto 78px no-repeat,
+            url(../images/user/bg-buy-gold-1.png) center / cover no-repeat,
+            url(../images/user/bg-buy-gold-3.png) bottom no-repeat, url(../images/user/bg-buy-gold-2.png) top no-repeat;
+    }
+
+    &__main {
+    }
+
+    .main {
+        &__content {
+            padding: 0;
+            background: none;
+            border: none;
+
+            @include viewport.dev-content-wrapper;
+        }
+
+        &__wrapper {
+        }
+
+        &__top {
+            @extend %flex-col-fs-fs;
+            & > :last-child {
+                margin-top: auto;
+            }
+            min-height: 590px;
+            background: url(../images/user/bg-buy-gold-igold.png) right top no-repeat;
+        }
+        &__center {
+        }
+        &__bottom {
+            margin-top: 32px;
+        }
+    }
+
+    .form {
+        max-width: 400px;
+
+        input {
+            margin-bottom: 1em;
+            outline-color: colors.$accent;
+        }
+    }
+
+    .balance {
+        margin-top: 26px;
+
+        &.flex {
+            gap: 3em;
+            // @extend %flex-col-fe-fs;
+            .marked-block {
+                min-width: 288px;
+            }
+        }
+    }
+
+    .more {
+        margin-top: 70px;
+    }
+
+    .advantages {
+        &.flex {
+            @extend %flex-sa-c;
+        }
+
+        .advantage {
+            margin-top: 40px;
+
+            img {
+                width: auto;
+                height: 90px;
+                margin: 0 auto;
+            }
+
+            figcaption {
+                margin-top: 1em;
+            }
+        }
+    }
+}
+
+.buy-gold-confirmation {
+    @extend %font-size-20;
+    background-color: colors.$bgc-gray;
+    padding: viewport.$gap;
+
+    span {
+        @extend %font-size-60;
+        @extend .fw-5;
+        color: colors.$active;
+    }
+
+    .main__wrapper {
+    }
+}

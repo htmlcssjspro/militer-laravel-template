@@ -1,0 +1,14 @@
+@use '/resources/scss/config/colors';
+
+@use '/resources/scss/common/flex';
+
+.banner {
+    &_header {
+        height: 200px;
+        background-color: colors.$bgc-light-alpha;
+
+        &.flex {
+            @extend %flex-c;
+        }
+    }
+}
