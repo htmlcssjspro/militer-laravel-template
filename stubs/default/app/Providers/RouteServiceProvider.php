@@ -49,12 +49,6 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/posts.php'));
 
             Route::middleware('web')
-                ->group(base_path('routes/breeze.php'));
-
-            Route::middleware('web')
-                ->group(base_path('routes/test.php'));
-
-            Route::middleware('web')
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')

@@ -32,12 +32,14 @@ trait InstallsDefaultTemplate
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/lang/ru', base_path('lang/ru'));
 
         //* Routes...
+        copy(__DIR__ . '/../../stubs/default/routes/api.php', base_path('routes/api.php'));
         copy(__DIR__ . '/../../stubs/default/routes/admin.php', base_path('routes/admin.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/news.php', base_path('routes/news.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/pages.php', base_path('routes/pages.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/posts.php', base_path('routes/posts.php'));
         copy(__DIR__ . '/../../stubs/default/routes/user.php', base_path('routes/user.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/auth.php', base_path('routes/auth.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/news.php', base_path('routes/news.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/posts.php', base_path('routes/posts.php'));
         copy(__DIR__ . '/../../stubs/default/routes/web.php', base_path('routes/web.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/pages.php', base_path('routes/pages.php'));
 
         copy(
             __DIR__ . '/../../stubs/default/app/Providers/RouteServiceProvider.php',
