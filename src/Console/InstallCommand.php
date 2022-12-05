@@ -12,6 +12,7 @@ use Symfony\Component\Process\Process;
 class InstallCommand extends Command
 {
     // use InstallsApiStack, InstallsBladeStack, InstallsInertiaStacks;
+    use InstalsHelpers, InstalsDefaultTemplate;
 
     /**
      * The name and signature of the console command.
@@ -36,7 +37,6 @@ class InstallCommand extends Command
      */
     public function handle()
     {
-        // NPM Packages...
         $this->updateNodePackages(
             [
                 "@tailwindcss/forms" => "^0.5.3",
@@ -58,61 +58,10 @@ class InstallCommand extends Command
             ]
         );
 
-        // Controllers...
-        // (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Auth'));
-        // (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/default/app/Http/Controllers/Auth', app_path('Http/Controllers/Auth'));
+        $this->installHelpers();
 
-        // Anonymous components...
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/layout'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/layouts', resource_path('views/layouts'));
+        $this->installDefaultTemplate();
 
-        // (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
-        // (new Filesystem)->ensureDirectoryExists(resource_path('views/components'));
-
-        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/auth', resource_path('views/auth'));
-        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/components', resource_path('views/components'));
-
-        // Views
-
-        // copy(__DIR__ . '/../../stubs/default/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
-
-        // Components Classes
-        // (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
-        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/app/View/Components', app_path('View/Components'));
-
-        // Routes...
-        // copy(__DIR__ . '/../../stubs/default/routes/web.php', base_path('routes/web.php'));
-        // copy(__DIR__ . '/../../stubs/default/routes/auth.php', base_path('routes/auth.php'));
-
-        // "Dashboard" Route...
-        // $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
-        // $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
-        // $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
-
-        // helpers
-        (new Filesystem)->ensureDirectoryExists(app_path('Helpers'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/app/Helpers/helpers.php', app_path('Helpers/helpers.php'));
-
-        // .htaccess
-        copy(__DIR__ . '/../../stubs/default/.htaccess', base_path('.htaccess'));
-        copy(__DIR__ . '/../../stubs/default/public/.htaccess', public_path('.htaccess'));
-
-        // base_path
-        copy(__DIR__ . '/../../stubs/default/vite.config.js', base_path('vite.config.js'));
-        copy(__DIR__ . '/../../stubs/default/.eslintrc.json', base_path('.eslintrc.json'));
-        copy(__DIR__ . '/../../stubs/default/postcss.config.js', base_path('postcss.config.js'));
-        copy(__DIR__ . '/../../stubs/default/tailwind.config.js', base_path('tailwind.config.js'));
-
-        // public_path
-        copy(__DIR__ . '/../../stubs/default/public/robots.txt', public_path('robots.txt'));
-
-        // resource_path
-        copy(__DIR__ . '/../../stubs/default/resources/js/app.js', resource_path('js/app.js'));
-        copy(__DIR__ . '/../../stubs/default/resources/css/app.css', resource_path('css/app.css'));
-
-        $this->runCommands(['npm install', 'npx vite']);
-        $this->line('');
-        $this->components->info('Militer Template scaffolding installed successfully.');
 
 
         // if (error) {
@@ -128,8 +77,7 @@ class InstallCommand extends Command
      * @param  array $dependencies
      * @return void
      */
-    // protected static function updateNodePackages(callable $callback, $configurationKey = 'devDependencies')
-    protected static function updateNodePackages(array $devDependencies, array $dependencies)
+    protected static function updateNodePackages(array $devDependencies, array $dependencies = [])
     {
         if (!file_exists(base_path('package.json'))) {
             copy(__DIR__ . '/../../stubs/default/package.json', base_path('package.json'));
@@ -152,7 +100,6 @@ class InstallCommand extends Command
             json_encode($packages, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
         );
     }
-
 
     /**
      * Run the given commands.
