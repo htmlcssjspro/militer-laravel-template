@@ -27,7 +27,7 @@ class InstallCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Install the Breeze controllers and resources';
+    protected $description = 'Install the Militer Template scaffolding';
 
     /**
      * Execute the console command.
@@ -62,18 +62,21 @@ class InstallCommand extends Command
         // (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Auth'));
         // (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/default/app/Http/Controllers/Auth', app_path('Http/Controllers/Auth'));
 
-        // Views...
+        // Anonymous components...
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/layout'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/layouts', resource_path('views/layouts'));
+
         // (new Filesystem)->ensureDirectoryExists(resource_path('views/auth'));
-        // (new Filesystem)->ensureDirectoryExists(resource_path('views/layouts'));
         // (new Filesystem)->ensureDirectoryExists(resource_path('views/components'));
 
         // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/auth', resource_path('views/auth'));
-        // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/layouts', resource_path('views/layouts'));
         // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/resources/views/components', resource_path('views/components'));
+
+        // Views
 
         // copy(__DIR__ . '/../../stubs/default/resources/views/dashboard.blade.php', resource_path('views/dashboard.blade.php'));
 
-        // Components...
+        // Components Classes
         // (new Filesystem)->ensureDirectoryExists(app_path('View/Components'));
         // (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/app/View/Components', app_path('View/Components'));
 
@@ -86,21 +89,36 @@ class InstallCommand extends Command
         // $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
         // $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
 
-        // Tailwind / Vite...
+        // helpers
+        (new Filesystem)->ensureDirectoryExists(app_path('Helpers'));
+        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/app/Helpers/helpers.php', app_path('Helpers/helpers.php'));
+
+        // .htaccess
+        copy(__DIR__ . '/../../stubs/default/.htaccess', base_path('.htaccess'));
+        copy(__DIR__ . '/../../stubs/default/public/.htaccess', public_path('.htaccess'));
+
+        // base_path
         copy(__DIR__ . '/../../stubs/default/vite.config.js', base_path('vite.config.js'));
         copy(__DIR__ . '/../../stubs/default/.eslintrc.json', base_path('.eslintrc.json'));
-        copy(__DIR__ . '/../../stubs/default/.htaccess', base_path('.htaccess'));
-        copy(__DIR__ . '/../../stubs/default/tailwind.config.js', base_path('tailwind.config.js'));
         copy(__DIR__ . '/../../stubs/default/postcss.config.js', base_path('postcss.config.js'));
+        copy(__DIR__ . '/../../stubs/default/tailwind.config.js', base_path('tailwind.config.js'));
+
+        // public_path
+        copy(__DIR__ . '/../../stubs/default/public/robots.txt', public_path('robots.txt'));
+
+        // resource_path
         copy(__DIR__ . '/../../stubs/default/resources/js/app.js', resource_path('js/app.js'));
         copy(__DIR__ . '/../../stubs/default/resources/css/app.css', resource_path('css/app.css'));
 
-        $this->runCommands(['npm install', 'npm run build']);
+        $this->runCommands(['npm install', 'npx vite']);
         $this->line('');
         $this->components->info('Militer Template scaffolding installed successfully.');
-        $this->components->error('Militer Template Error');
 
-        return 1;
+
+        // if (error) {
+        //     $this->components->error('Militer Template Error');
+        //     return 1;
+        // }
     }
 
     /**
@@ -114,6 +132,7 @@ class InstallCommand extends Command
     protected static function updateNodePackages(array $devDependencies, array $dependencies)
     {
         if (!file_exists(base_path('package.json'))) {
+            copy(__DIR__ . '/../../stubs/default/package.json', base_path('package.json'));
             return;
         }
 
@@ -149,12 +168,12 @@ class InstallCommand extends Command
             try {
                 $process->setTty(true);
             } catch (RuntimeException $e) {
-                $this->output->writeln('  <bg=yellow;fg=black> WARN </> '.$e->getMessage().PHP_EOL);
+                $this->output->writeln('  <bg=yellow;fg=black> WARN </> ' . $e->getMessage() . PHP_EOL);
             }
         }
 
         $process->run(function ($type, $line) {
-            $this->output->write('    '.$line);
+            $this->output->write('    ' . $line);
         });
     }
 }
