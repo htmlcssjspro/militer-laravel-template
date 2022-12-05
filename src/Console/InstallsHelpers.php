@@ -19,6 +19,7 @@ trait InstallsHelpers
             __DIR__ . '/../../stubs/default/app/Helpers/helpers.php',
             app_path('Helpers/helpers.php')
         );
+        copy(__DIR__ . '/../../stubs/default/app/Helpers/helpers.php', app_path('Helpers/helpers.php'));
 
         $composerJson = json_decode(file_get_contents(base_path('composer.json')), true);
 
