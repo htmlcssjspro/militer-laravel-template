@@ -11,8 +11,7 @@ use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
 {
-    // use InstallsApiStack, InstallsBladeStack, InstallsInertiaStacks;
-    use InstalsHelpers, InstalsDefaultTemplate;
+    use InstallsHelpers, InstallsDefaultTemplate;
 
     /**
      * The name and signature of the console command.

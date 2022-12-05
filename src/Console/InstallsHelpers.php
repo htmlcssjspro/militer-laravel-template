@@ -4,7 +4,7 @@ namespace Militer\Template\Console;
 
 use Illuminate\Filesystem\Filesystem;
 
-trait InstalsHelpers
+trait InstallsHelpers
 {
     /**
      * Install Militer Template Helpers.php
