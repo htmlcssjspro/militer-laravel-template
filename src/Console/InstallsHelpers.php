@@ -25,7 +25,7 @@ trait InstallsHelpers
         $autoload = array_key_exists('autoload', $composerJson) ? $composerJson['autoload'] : [];
         $files = array_key_exists('files', $autoload) ? $autoload['files'] : [];
 
-        $composerJson['autoload']['files'] = array_push($files, 'app/Helpers/helpers.php');
+        $composerJson['autoload']['files'][] = 'app/Helpers/helpers.php';
 
         ksort($composerJson['autoload']['files']);
 
