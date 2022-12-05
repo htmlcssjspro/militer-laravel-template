@@ -35,8 +35,8 @@ trait InstallsHelpers
             json_encode($composerJson, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
         );
 
-        // $this->runCommands(['composer dump-autoload']);
-        // $this->line('');
+        $this->runCommands(['composer dump-autoload']);
+        $this->line('');
         // $this->components->info('Militer Template Helpers installed successfully.');
     }
 }
