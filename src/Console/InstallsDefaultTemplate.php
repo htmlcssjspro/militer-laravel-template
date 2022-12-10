@@ -7,22 +7,21 @@ use Illuminate\Filesystem\Filesystem;
 trait InstallsDefaultTemplate
 {
     /**
-     * Install Militer Template Helpers.php
-     * Update the "composer.json" file.
+     * Install Militer Template Default
      *
      * @return void
      */
     protected function installDefaultTemplate()
     {
+        //* .htaccess
+        copy(__DIR__ . '/../../stubs/default/.htaccess', base_path('.htaccess'));
+        copy(__DIR__ . '/../../stubs/default/public/.htaccess', public_path('.htaccess'));
+
         //* base_path
         copy(__DIR__ . '/../../stubs/default/vite.config.js', base_path('vite.config.js'));
         copy(__DIR__ . '/../../stubs/default/.eslintrc.json', base_path('.eslintrc.json'));
         copy(__DIR__ . '/../../stubs/default/postcss.config.js', base_path('postcss.config.js'));
         copy(__DIR__ . '/../../stubs/default/tailwind.config.js', base_path('tailwind.config.js'));
-
-        //* .htaccess
-        copy(__DIR__ . '/../../stubs/default/.htaccess', base_path('.htaccess'));
-        copy(__DIR__ . '/../../stubs/default/public/.htaccess', public_path('.htaccess'));
 
         //* public_path
         copy(__DIR__ . '/../../stubs/default/public/robots.txt', public_path('robots.txt'));
@@ -30,6 +29,8 @@ trait InstallsDefaultTemplate
         //* Translations
         (new Filesystem)->ensureDirectoryExists(base_path('lang/ru'));
         (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/lang/ru', base_path('lang/ru'));
+
+        //? Config
 
         //* Routes...
         copy(__DIR__ . '/../../stubs/default/routes/api.php', base_path('routes/api.php'));
@@ -49,6 +50,12 @@ trait InstallsDefaultTemplate
         //* Controllers
         // (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Auth'));
         // (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/default/app/Http/Controllers/Auth', app_path('Http/Controllers/Auth'));
+
+        //* Models
+
+        //* Database Migrations
+        //* Database Factories
+        //* Database Seeders
 
         //* Resources
         (new Filesystem)->ensureDirectoryExists(resource_path('js'));
@@ -116,6 +123,6 @@ trait InstallsDefaultTemplate
 
         $this->components->info('Militer Template scaffolding installed successfully.');
         $this->line('');
-        $this->runCommands(['npm install', 'npx vite']);
+        $this->runShellCommand('npm install && npx vite');
     }
 }

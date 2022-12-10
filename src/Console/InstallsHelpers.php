@@ -16,10 +16,9 @@ trait InstallsHelpers
     {
         (new Filesystem)->ensureDirectoryExists(app_path('Helpers'));
         (new Filesystem)->copyDirectory(
-            __DIR__ . '/../../stubs/default/app/Helpers/helpers.php',
-            app_path('Helpers/helpers.php')
+            __DIR__ . '/../../stubs/default/app/Helpers',
+            app_path('Helpers')
         );
-        copy(__DIR__ . '/../../stubs/default/app/Helpers/helpers.php', app_path('Helpers/helpers.php'));
 
         $composerJson = json_decode(file_get_contents(base_path('composer.json')), true);
 
@@ -35,7 +34,7 @@ trait InstallsHelpers
             json_encode($composerJson, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) . PHP_EOL
         );
 
-        $this->runCommands(['composer dump-autoload']);
+        $this->runShellCommand('composer dump-autoload');
         $this->line('');
         // $this->components->info('Militer Template Helpers installed successfully.');
     }

@@ -11,16 +11,19 @@ use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
 {
-    use InstallsHelpers, InstallsDefaultTemplate;
+    use InstallsDefaultTemplate, InstallsHelpers, InstallsBlog, InstallsNews;
 
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'militer-template:install
-                            {stack=default : The development stack that should be installed (default)}
-                            {--some-key=value : Some key and their defalt value}';
+    protected $signature = '
+        militer-template:install
+        {template=default : The template type that should be installed}
+        {--blog=true : Add Blog to the App}
+        {--news=true : Add News to the App}
+    ';
 
     /**
      * The console command description.
@@ -61,12 +64,88 @@ class InstallCommand extends Command
 
         $this->installDefaultTemplate();
 
+        $this->installLiveWire();
+        $this->installLogViewer();
+
+        $this->runShellCommand('php artisan storage:link');
 
 
         // if (error) {
         //     $this->components->error('Militer Template Error');
         //     return 1;
         // }
+    }
+
+    /**
+     * Install Laravel LiveWire.
+     *
+     * @return void
+     */
+    protected function installLiveWire()
+    {
+        $this->requireComposerPackage('livewire/livewire');
+    }
+
+    /**
+     * Install Log Viewer.
+     *
+     * @return void
+     */
+    protected function installLogViewer()
+    {
+        $this->requireComposerPackage('opcodesio/log-viewer');
+
+        copy(
+            __DIR__ . '/../../stubs/defalt/config/log-viewer.php',
+            config_path('log-viewer.php')
+        );
+    }
+
+    /**
+     * Install the given Composer Package into the application.
+     *
+     * @param  string  $package
+     * @return void
+     */
+    protected function requireComposerPackage(string $package)
+    {
+        $this->runShellCommand('composer require ' . $package);
+    }
+
+    /**
+     * Run the given command.
+     *
+     * @param  string  $command
+     * @return void
+     */
+    protected function runShellCommand($command)
+    {
+        $process = Process::fromShellCommandline($command, base_path(), null, null, null);
+
+        if ('\\' !== DIRECTORY_SEPARATOR && file_exists('/dev/tty') && is_readable('/dev/tty')) {
+            try {
+                $process->setTty(true);
+            } catch (RuntimeException $e) {
+                $this->output->writeln('  <bg=yellow;fg=black> WARN </> ' . $e->getMessage() . PHP_EOL);
+            }
+        }
+
+        $process->run(function ($type, $line) {
+            $this->output->write('    ' . $line);
+        });
+    }
+
+    /**
+     * Replace a given string within a given file.
+     *
+     * @param  string  $search
+     * @param  string  $replace
+     * @param  string  $path
+     * @return void
+     */
+    protected function replaceInFile($search, $replace, $path)
+    {
+        file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
     }
 
     /**
@@ -101,25 +180,17 @@ class InstallCommand extends Command
     }
 
     /**
-     * Run the given commands.
+     * Delete the "node_modules" directory and remove the associated lock files.
      *
-     * @param  array  $commands
      * @return void
      */
-    protected function runCommands($commands)
+    protected static function flushNodeModules()
     {
-        $process = Process::fromShellCommandline(implode(' && ', $commands), null, null, null, null);
-
-        if ('\\' !== DIRECTORY_SEPARATOR && file_exists('/dev/tty') && is_readable('/dev/tty')) {
-            try {
-                $process->setTty(true);
-            } catch (RuntimeException $e) {
-                $this->output->writeln('  <bg=yellow;fg=black> WARN </> ' . $e->getMessage() . PHP_EOL);
-            }
-        }
-
-        $process->run(function ($type, $line) {
-            $this->output->write('    ' . $line);
+        tap(new Filesystem, function ($files) {
+            $files->deleteDirectory(base_path('node_modules'));
+            $files->delete(base_path('package-lock.json'));
+            $files->delete(base_path('yarn.lock'));
         });
     }
+
 }
