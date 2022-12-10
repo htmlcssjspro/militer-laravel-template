@@ -21,8 +21,8 @@ class InstallCommand extends Command
     protected $signature = '
         militer-template:install
         {template=default : The template type that should be installed}
-        {--blog=true : Add Blog to the App}
-        {--news=true : Add News to the App}
+        {--blog=false : Add Blog to the App}
+        {--news=false : Add News to the App}
     ';
 
     /**
