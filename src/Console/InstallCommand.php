@@ -21,8 +21,9 @@ class InstallCommand extends Command
     protected $signature = '
         militer-template:install
         {template=default : The template type that should be installed}
-        {--blog=false : Add Blog to the App}
-        {--news=false : Add News to the App}
+        {--blog : Add Blog to the App}
+        {--news : Add News to the App}
+        {--all : Add All Militer Template feachers to the App}
     ';
 
     /**
@@ -59,21 +60,30 @@ class InstallCommand extends Command
                 "tailwindcss" => "^3.2.4",
             ]
         );
+        $this->flushNodeModules();
+        $this->runShellCommand('npm install');
 
         $this->installHelpers();
-
-        $this->installDefaultTemplate();
-
         $this->installLiveWire();
         $this->installLogViewer();
-
         $this->runShellCommand('php artisan storage:link');
 
+        if ($this->argument('template') === 'default') {
+            return $this->installDefaultTemplate();
+        }
+        if ($this->option('all')) {
+            $this->installBlog();
+            $this->installNews();
+            return;
+        } elseif ($this->option('blog')) {
+            return $this->installBlog();
+        } elseif ($this->option('news')) {
+            return $this->installNews();
+        }
 
-        // if (error) {
-        //     $this->components->error('Militer Template Error');
-        //     return 1;
-        // }
+        $this->components->error('Invalid template type or options. Supported template types are [default]. Supported options are [--all], [--blog], [--news]');
+
+        return 1;
     }
 
     /**
@@ -149,7 +159,69 @@ class InstallCommand extends Command
     }
 
     /**
-     * Update the "package.json" file.
+     * Install the route group to the application RouteServiceProvider.
+     *
+     * @param  string  $group
+     * @param  string  $middleware
+     * @return void
+     */
+    protected function installRouteGroup($group, $middleware = 'web')
+    {
+        $routeServiceProvider = file_get_contents(app_path('Providers/RouteServiceProvider.php'));
+
+        $routeGroups = Str::before(Str::after($routeServiceProvider, '$this->routes(function () {'), '});');
+
+        $group =
+            str_pad('', 12) . "Route::middleware('{$middleware}')" . PHP_EOL .
+            str_pad('', 16) . "->group(base_path('routes/{$group}.php'));";
+        $before =
+            str_pad('', 12) . "Route::middleware('web')" . PHP_EOL .
+            str_pad('', 16) . "->group(base_path('routes/web.php'));";
+
+        if (!Str::contains($routeGroups, $group)) {
+            $modifiedRouteGroups = str_replace(
+                $before,
+                PHP_EOL . $group . PHP_EOL . PHP_EOL . $before,
+                $routeGroups
+            );
+
+            file_put_contents(
+                app_path('Providers/RouteServiceProvider.php'),
+                str_replace($routeGroups, $modifiedRouteGroups, $routeServiceProvider)
+            );
+        }
+    }
+
+    /**
+     * Install the seeder to the application DatabaseSeeder.
+     *
+     * @param  string  $seeder
+     * @return void
+     */
+    protected function installDatabaseSeeder($seeder)
+    {
+        $dataBaseSeeder = file_get_contents(app_path('database/seeders/DataBaseSeeder.php'));
+
+        $seederList = Str::before(Str::after($dataBaseSeeder, '$this->call(['), ']);');
+
+        $after = str_pad('', 12) . 'PageSeeder::class,';
+
+        if (!Str::contains($seederList, $seeder)) {
+            $modifiedSeederList = str_replace(
+                $after,
+                $after . PHP_EOL . $seeder . '::class,' . PHP_EOL,
+                $seederList
+            );
+
+            file_put_contents(
+                app_path('database/seeders/DataBaseSeeder.php'),
+                str_replace($seederList, $modifiedSeederList, $dataBaseSeeder)
+            );
+        }
+    }
+
+    /**
+     * Update the package.json file.
      *
      * @param  array $devDependencies
      * @param  array $dependencies
@@ -189,8 +261,6 @@ class InstallCommand extends Command
         tap(new Filesystem, function ($files) {
             $files->deleteDirectory(base_path('node_modules'));
             $files->delete(base_path('package-lock.json'));
-            $files->delete(base_path('yarn.lock'));
         });
     }
-
 }

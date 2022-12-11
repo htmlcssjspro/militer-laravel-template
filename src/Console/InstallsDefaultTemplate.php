@@ -33,13 +33,11 @@ trait InstallsDefaultTemplate
         //? Config
 
         //* Routes...
-        copy(__DIR__ . '/../../stubs/default/routes/api.php', base_path('routes/api.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/api.php',   base_path('routes/api.php'));
         copy(__DIR__ . '/../../stubs/default/routes/admin.php', base_path('routes/admin.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/user.php', base_path('routes/user.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/auth.php', base_path('routes/auth.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/news.php', base_path('routes/news.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/posts.php', base_path('routes/posts.php'));
-        copy(__DIR__ . '/../../stubs/default/routes/web.php', base_path('routes/web.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/user.php',  base_path('routes/user.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/auth.php',  base_path('routes/auth.php'));
+        copy(__DIR__ . '/../../stubs/default/routes/web.php',   base_path('routes/web.php'));
         copy(__DIR__ . '/../../stubs/default/routes/pages.php', base_path('routes/pages.php'));
 
         copy(
@@ -48,14 +46,110 @@ trait InstallsDefaultTemplate
         );
 
         //* Controllers
-        // (new Filesystem)->ensureDirectoryExists(app_path('Http/Controllers/Auth'));
-        // (new Filesystem)->copyDirectory(__DIR__.'/../../stubs/default/app/Http/Controllers/Auth', app_path('Http/Controllers/Auth'));
+        copy(
+            __DIR__ . '/../../stubs/default/app/Http/Controllers/AdminController.php',
+            app_path('Http/Controllers/AdminController.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/app/Http/Controllers/ApiController.php',
+            app_path('Http/Controllers/ApiController.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/app/Http/Controllers/PageController.php',
+            app_path('Http/Controllers/PageController.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/app/Http/Controllers/TestController.php',
+            app_path('Http/Controllers/TestController.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/app/Http/Controllers/UserController.php',
+            app_path('Http/Controllers/UserController.php')
+        );
 
         //* Models
+        copy(
+            __DIR__ . '/../../stubs/default/app/Models/Admin.php',
+            app_path('Models/Admin.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/app/Models/Page.php',
+            app_path('Models/Page.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/app/Models/Test.php',
+            app_path('Models/Test.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/app/Models/User.php',
+            app_path('Models/User.php')
+        );
 
         //* Database Migrations
+        copy(
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_100001_create_users_table.php',
+            app_path('database/migrations/2022_12_03_100001_create_users_table.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_100002_create_user_password_resets_table.php',
+            app_path('database/migrations/2022_12_03_100002_create_user_password_resets_table.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_200001_create_failed_jobs_table.php',
+            app_path('database/migrations/2022_12_03_200001_create_failed_jobs_table.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_300001_create_pages_table.php',
+            app_path('database/migrations/2022_12_03_300001_create_pages_table.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_300002_create_admin_pages_table.php',
+            app_path('database/migrations/2022_12_03_300002_create_admin_pages_table.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_300003_create_user_pages_table.php',
+            app_path('database/migrations/2022_12_03_300003_create_user_pages_table.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_999111_create_tests_table.php',
+            app_path('database/migrations/2022_12_03_999111_create_tests_table.php')
+        );
+
         //* Database Factories
+        copy(
+            __DIR__ . '/../../stubs/default/database/factories/AdminFactory.php',
+            app_path('database/factories/AdminFactory.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/factories/UserFactory.php',
+            app_path('database/factories/UserFactory.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/factories/TestFactory.php',
+            app_path('database/factories/TestFactory.php')
+        );
+
         //* Database Seeders
+        copy(
+            __DIR__ . '/../../stubs/default/database/seeders/DataBaseSeeder.php',
+            app_path('database/seeders/DataBaseSeeder.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/seeders/UserSeeder.php',
+            app_path('database/seeders/UserSeeder.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/seeders/PageSeeder.php',
+            app_path('database/seeders/PageSeeder.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/seeders/UserPageSeeder.php',
+            app_path('database/seeders/UserPageSeeder.php')
+        );
+        copy(
+            __DIR__ . '/../../stubs/default/database/seeders/TestSeeder.php',
+            app_path('database/seeders/TestSeeder.php')
+        );
 
         //* Resources
         (new Filesystem)->ensureDirectoryExists(resource_path('js'));
