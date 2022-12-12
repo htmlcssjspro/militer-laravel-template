@@ -79,51 +79,51 @@ trait InstallsDefaultTemplate
         (new Filesystem)->cleanDirectory(base_path('database/migrations'));
         copy(
             __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_100001_create_users_table.php',
-            app_path('database/migrations/2022_12_03_100001_create_users_table.php')
+            base_path('database/migrations/2022_12_03_100001_create_users_table.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_100002_create_user_password_resets_table.php',
-            app_path('database/migrations/2022_12_03_100002_create_user_password_resets_table.php')
+            base_path('database/migrations/2022_12_03_100002_create_user_password_resets_table.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_200001_create_failed_jobs_table.php',
-            app_path('database/migrations/2022_12_03_200001_create_failed_jobs_table.php')
+            base_path('database/migrations/2022_12_03_200001_create_failed_jobs_table.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_300001_create_pages_table.php',
-            app_path('database/migrations/2022_12_03_300001_create_pages_table.php')
+            base_path('database/migrations/2022_12_03_300001_create_pages_table.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_900001_create_tests_table.php',
-            app_path('database/migrations/2022_12_03_900001_create_tests_table.php')
+            base_path('database/migrations/2022_12_03_900001_create_tests_table.php')
         );
 
         //* Database Factories
         copy(
             __DIR__ . '/../../stubs/default/database/factories/UserFactory.php',
-            app_path('database/factories/UserFactory.php')
+            base_path('database/factories/UserFactory.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/factories/TestFactory.php',
-            app_path('database/factories/TestFactory.php')
+            base_path('database/factories/TestFactory.php')
         );
 
         //* Database Seeders
         copy(
             __DIR__ . '/../../stubs/default/database/seeders/DataBaseSeeder.php',
-            app_path('database/seeders/DataBaseSeeder.php')
+            base_path('database/seeders/DataBaseSeeder.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/seeders/UserSeeder.php',
-            app_path('database/seeders/UserSeeder.php')
+            base_path('database/seeders/UserSeeder.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/seeders/PageSeeder.php',
-            app_path('database/seeders/PageSeeder.php')
+            base_path('database/seeders/PageSeeder.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/database/seeders/TestSeeder.php',
-            app_path('database/seeders/TestSeeder.php')
+            base_path('database/seeders/TestSeeder.php')
         );
 
 

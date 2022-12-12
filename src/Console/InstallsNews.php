@@ -40,21 +40,21 @@ trait InstallsNews
             //* Database Migrations
             copy(
                 __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_500002_create_posts_table.php',
-                app_path('database/migrations/2022_12_03_500002_create_posts_table.php')
+                base_path('database/migrations/2022_12_03_500002_create_posts_table.php')
             );
 
 
             //* Database Factories
             copy(
                 __DIR__ . '/../../stubs/default/database/factories/NewsFactory.php',
-                app_path('database/factories/NewsFactory.php')
+                base_path('database/factories/NewsFactory.php')
             );
 
 
             //* Database Seeders
             copy(
                 __DIR__ . '/../../stubs/default/database/seeders/NewsSeeder.php',
-                app_path('database/seeders/NewsSeeder.php')
+                base_path('database/seeders/NewsSeeder.php')
             );
             $this->installDatabaseSeeder('NewsSeeder');
 

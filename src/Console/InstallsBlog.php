@@ -40,34 +40,34 @@ trait InstallsBlog
             //* Database Migrations
             copy(
                 __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_500002_create_posts_table.php',
-                app_path('database/migrations/2022_12_03_500002_create_posts_table.php')
+                base_path('database/migrations/2022_12_03_500002_create_posts_table.php')
             );
             copy(
                 __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_500003_create_comments_table.php',
-                app_path('database/migrations/2022_12_03_500003_create_comments_table.php')
+                base_path('database/migrations/2022_12_03_500003_create_comments_table.php')
             );
 
 
             //* Database Factories
             copy(
                 __DIR__ . '/../../stubs/default/database/factories/CommentFactory.php',
-                app_path('database/factories/CommentFactory.php')
+                base_path('database/factories/CommentFactory.php')
             );
             copy(
                 __DIR__ . '/../../stubs/default/database/factories/PostFactory.php',
-                app_path('database/factories/PostFactory.php')
+                base_path('database/factories/PostFactory.php')
             );
 
 
             //* Database Seeders
             copy(
                 __DIR__ . '/../../stubs/default/database/seeders/PostSeeder.php',
-                app_path('database/seeders/PostSeeder.php')
+                base_path('database/seeders/PostSeeder.php')
             );
             $this->installDatabaseSeeder('PostSeeder');
             copy(
                 __DIR__ . '/../../stubs/default/database/seeders/CommentSeeder.php',
-                app_path('database/seeders/CommentSeeder.php')
+                base_path('database/seeders/CommentSeeder.php')
             );
             $this->installDatabaseSeeder('CommentSeeder::class');
 
