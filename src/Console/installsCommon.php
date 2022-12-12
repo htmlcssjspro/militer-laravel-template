@@ -84,7 +84,7 @@ trait InstallsCommon
         $this->requireComposerPackage('opcodesio/log-viewer');
 
         copy(
-            __DIR__ . '/../../stubs/defalt/config/log-viewer.php',
+            __DIR__ . '/../../stubs/default/config/log-viewer.php',
             config_path('log-viewer.php')
         );
     }
