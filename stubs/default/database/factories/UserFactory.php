@@ -18,12 +18,6 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'nickname' => $this->faker->unique()->userName(),
-
-            'account_id' => $this->faker->randomNumber(7, true),
-            'access_token' => $this->faker->randomNumber(9, true),
-            'expires_at' => now()->addDays(14),
-
             'name' => $this->faker->name(),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),

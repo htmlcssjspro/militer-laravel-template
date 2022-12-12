@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('pages', function (Blueprint $table) {
             $table->id()->from(101);
             $table->string('name');
+            $table->string('prefix')->default('');
             $table->string('slug');
             $table->string('view');
             $table->string('meta_title');

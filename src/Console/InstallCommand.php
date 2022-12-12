@@ -11,7 +11,7 @@ use Symfony\Component\Process\Process;
 
 class InstallCommand extends Command
 {
-    use InstallsDefaultTemplate, InstallsHelpers, InstallsBlog, InstallsNews;
+    use InstallsCommon, InstallsDefaultTemplate, InstallsBlog, InstallsNews;
 
     /**
      * The name and signature of the console command.
@@ -63,6 +63,7 @@ class InstallCommand extends Command
         $this->flushNodeModules();
         $this->runShellCommand('npm install');
 
+        $this->installBasePath();
         $this->installHelpers();
         $this->installLiveWire();
         $this->installLogViewer();
@@ -71,6 +72,7 @@ class InstallCommand extends Command
         if ($this->argument('template') === 'default') {
             return $this->installDefaultTemplate();
         }
+
         if ($this->option('all')) {
             $this->installBlog();
             $this->installNews();
@@ -84,31 +86,6 @@ class InstallCommand extends Command
         $this->components->error('Invalid template type or options. Supported template types are [default]. Supported options are [--all], [--blog], [--news]');
 
         return 1;
-    }
-
-    /**
-     * Install Laravel LiveWire.
-     *
-     * @return void
-     */
-    protected function installLiveWire()
-    {
-        $this->requireComposerPackage('livewire/livewire');
-    }
-
-    /**
-     * Install Log Viewer.
-     *
-     * @return void
-     */
-    protected function installLogViewer()
-    {
-        $this->requireComposerPackage('opcodesio/log-viewer');
-
-        copy(
-            __DIR__ . '/../../stubs/defalt/config/log-viewer.php',
-            config_path('log-viewer.php')
-        );
     }
 
     /**
@@ -143,19 +120,6 @@ class InstallCommand extends Command
         $process->run(function ($type, $line) {
             $this->output->write('    ' . $line);
         });
-    }
-
-    /**
-     * Replace a given string within a given file.
-     *
-     * @param  string  $search
-     * @param  string  $replace
-     * @param  string  $path
-     * @return void
-     */
-    protected function replaceInFile($search, $replace, $path)
-    {
-        file_put_contents($path, str_replace($search, $replace, file_get_contents($path)));
     }
 
     /**

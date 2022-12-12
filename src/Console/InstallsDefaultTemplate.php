@@ -13,24 +13,8 @@ trait InstallsDefaultTemplate
      */
     protected function installDefaultTemplate()
     {
-        //* .htaccess
-        copy(__DIR__ . '/../../stubs/default/.htaccess', base_path('.htaccess'));
-        copy(__DIR__ . '/../../stubs/default/public/.htaccess', public_path('.htaccess'));
-
-        //* base_path
-        copy(__DIR__ . '/../../stubs/default/vite.config.js', base_path('vite.config.js'));
-        copy(__DIR__ . '/../../stubs/default/.eslintrc.json', base_path('.eslintrc.json'));
-        copy(__DIR__ . '/../../stubs/default/postcss.config.js', base_path('postcss.config.js'));
-        copy(__DIR__ . '/../../stubs/default/tailwind.config.js', base_path('tailwind.config.js'));
-
-        //* public_path
-        copy(__DIR__ . '/../../stubs/default/public/robots.txt', public_path('robots.txt'));
-
-        //* Translations
-        (new Filesystem)->ensureDirectoryExists(base_path('lang/ru'));
-        (new Filesystem)->copyDirectory(__DIR__ . '/../../stubs/default/lang/ru', base_path('lang/ru'));
-
         //? Config
+
 
         //* Routes...
         copy(__DIR__ . '/../../stubs/default/routes/api.php',   base_path('routes/api.php'));
@@ -44,6 +28,7 @@ trait InstallsDefaultTemplate
             __DIR__ . '/../../stubs/default/app/Providers/RouteServiceProvider.php',
             app_path('Providers/RouteServiceProvider.php')
         );
+
 
         //* Controllers
         copy(
@@ -67,10 +52,11 @@ trait InstallsDefaultTemplate
             app_path('Http/Controllers/UserController.php')
         );
 
+
         //* Models
         copy(
-            __DIR__ . '/../../stubs/default/app/Models/Admin.php',
-            app_path('Models/Admin.php')
+            __DIR__ . '/../../stubs/default/app/Models/User.php',
+            app_path('Models/User.php')
         );
         copy(
             __DIR__ . '/../../stubs/default/app/Models/Page.php',
@@ -80,12 +66,17 @@ trait InstallsDefaultTemplate
             __DIR__ . '/../../stubs/default/app/Models/Test.php',
             app_path('Models/Test.php')
         );
-        copy(
-            __DIR__ . '/../../stubs/default/app/Models/User.php',
-            app_path('Models/User.php')
-        );
+
 
         //* Database Migrations
+        // (new Filesystem)->deleteDirectory(base_path('database/migrations'));
+        // (new Filesystem)->makeDirectory(base_path('database/migrations'));
+        // OR
+        // (new Filesystem)->ensureDirectoryExists(base_path('database/migrations'));
+        //* OR
+        // (new Filesystem)->deleteDirectory(base_path('database/migrations'), true);
+        //* OR
+        (new Filesystem)->cleanDirectory(base_path('database/migrations'));
         copy(
             __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_100001_create_users_table.php',
             app_path('database/migrations/2022_12_03_100001_create_users_table.php')
@@ -103,23 +94,11 @@ trait InstallsDefaultTemplate
             app_path('database/migrations/2022_12_03_300001_create_pages_table.php')
         );
         copy(
-            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_300002_create_admin_pages_table.php',
-            app_path('database/migrations/2022_12_03_300002_create_admin_pages_table.php')
-        );
-        copy(
-            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_300003_create_user_pages_table.php',
-            app_path('database/migrations/2022_12_03_300003_create_user_pages_table.php')
-        );
-        copy(
-            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_999111_create_tests_table.php',
-            app_path('database/migrations/2022_12_03_999111_create_tests_table.php')
+            __DIR__ . '/../../stubs/default/database/migrations/2022_12_03_900001_create_tests_table.php',
+            app_path('database/migrations/2022_12_03_900001_create_tests_table.php')
         );
 
         //* Database Factories
-        copy(
-            __DIR__ . '/../../stubs/default/database/factories/AdminFactory.php',
-            app_path('database/factories/AdminFactory.php')
-        );
         copy(
             __DIR__ . '/../../stubs/default/database/factories/UserFactory.php',
             app_path('database/factories/UserFactory.php')
@@ -143,13 +122,10 @@ trait InstallsDefaultTemplate
             app_path('database/seeders/PageSeeder.php')
         );
         copy(
-            __DIR__ . '/../../stubs/default/database/seeders/UserPageSeeder.php',
-            app_path('database/seeders/UserPageSeeder.php')
-        );
-        copy(
             __DIR__ . '/../../stubs/default/database/seeders/TestSeeder.php',
             app_path('database/seeders/TestSeeder.php')
         );
+
 
         //* Resources
         (new Filesystem)->ensureDirectoryExists(resource_path('js'));
@@ -196,10 +172,25 @@ trait InstallsDefaultTemplate
         );
 
         //* Views
-        (new Filesystem)->ensureDirectoryExists(resource_path('views/pages'));
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/pages/home'));
         (new Filesystem)->copyDirectory(
-            __DIR__ . '/../../stubs/default/resources/views/pages',
-            resource_path('views/pages')
+            __DIR__ . '/../../stubs/default/resources/views/pages/home',
+            resource_path('views/pages/home')
+        );
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/pages/admin'));
+        (new Filesystem)->copyDirectory(
+            __DIR__ . '/../../stubs/default/resources/views/pages/admin',
+            resource_path('views/pages/admin')
+        );
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/pages/user'));
+        (new Filesystem)->copyDirectory(
+            __DIR__ . '/../../stubs/default/resources/views/pages/user',
+            resource_path('views/pages/user')
+        );
+        (new Filesystem)->ensureDirectoryExists(resource_path('views/pages/test'));
+        (new Filesystem)->copyDirectory(
+            __DIR__ . '/../../stubs/default/resources/views/pages/test',
+            resource_path('views/pages/test')
         );
 
         //* Components Classes
@@ -210,13 +201,12 @@ trait InstallsDefaultTemplate
         // );
 
         //* "Dashboard" Route...
-        // $this->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
-        // $this->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
-        // $this->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
+        // (new Filesystem)->replaceInFile('/home', '/dashboard', app_path('Providers/RouteServiceProvider.php'));
+        // (new Filesystem)->replaceInFile('/home', '/dashboard', resource_path('views/welcome.blade.php'));
+        // (new Filesystem)->replaceInFile('Home', 'Dashboard', resource_path('views/welcome.blade.php'));
 
 
-        $this->components->info('Militer Template scaffolding installed successfully.');
+        $this->components->info('Militer Template Default scaffolding installed successfully.');
         $this->line('');
-        $this->runShellCommand('npm install && npx vite');
     }
 }

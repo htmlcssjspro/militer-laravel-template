@@ -2,15 +2,13 @@
 
 namespace App\Models;
 
-use App\Contracts\User as ContractsUser;
-use App\Services\Wot\WotApiService;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Authenticatable implements ContractsUser
+class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
@@ -63,66 +61,13 @@ class User extends Authenticatable implements ContractsUser
     ];
 
 
-    public function balance()
+    public function posts()
     {
-        return $this->hasOne(Balance::class, 'user_nickname', 'nickname');
+        return $this->hasMany(Post::class);
     }
 
-    public function stats()
+    public function news()
     {
-        return $this->hasOne(Stats::class, 'user_nickname', 'nickname');
-    }
-
-    public function battles()
-    {
-        return $this->belongsToMany(Battle::class)->withPivot(
-            'status',
-            'tank_id',
-            'stats_start',
-            'stats_end',
-            'start_at',
-            'completed_at',
-            'position',
-            'prize'
-        );
-    }
-
-    /**
-     * Get all sessions of events
-     */
-    public function sessions()
-    {
-        return $this->hasMany(Session::class);
-    }
-
-    /**
-     * Get all Events through Session
-     */
-    public function events()
-    {
-        return $this->hasMany(Event::class);
-
-        // return $this->hasManyThrough(
-        //     Event::class,
-        //     Session::class,
-        //     'user_id',
-        //     'session_uuid',
-        //     'id',
-        //     'uuid',
-        // );
-    }
-
-
-    // public function garage()
-    // {
-    //     $api = new WotApiService();
-    //     $garage = $api->getGarage($this);
-    //     return $garage;
-    // }
-
-
-    public function isAdmin()
-    {
-        return false;
+        return $this->hasMany(News::class);
     }
 }

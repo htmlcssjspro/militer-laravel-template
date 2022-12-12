@@ -18,62 +18,67 @@ class PageSeeder extends Seeder
         Page::factory()->create([
             'name' => 'home',
             'slug' => 'home',
-            'view' => 'pages.home',
+            'view' => 'pages.home.home',
             'meta_title' => 'Home Page',
             'meta_description' => 'Home Page Description',
             'title' => 'Заголовок Домашней страницы',
         ]);
 
         Page::factory()->create([
-            'name' => 'rating',
-            'slug' => 'rating',
-            'view' => 'pages.rating',
-            'meta_title' => 'Rating',
-            'meta_description' => 'Rating Description',
-            'title' => 'Рейтинг игроков',
-        ]);
-
-        Page::factory()->create([
-            'name' => 'instructions',
-            'slug' => 'instructions',
-            'view' => 'pages.instructions',
-            'meta_title' => 'Instructions',
-            'meta_description' => 'Instructions Description',
-            'title' => 'Инструкции для игроков',
+            'name' => 'login',
+            'slug' => 'login',
+            'view' => 'pages.login.login',
+            'meta_title' => 'Login Page',
+            'meta_description' => 'Login Page Description',
+            'title' => 'Login',
         ]);
 
         Page::factory()->create([
             'name' => 'faq',
             'slug' => 'faq',
-            'view' => 'pages.faq',
+            'view' => 'pages.faq.faq',
             'meta_title' => 'FAQ',
             'meta_description' => 'FAQ Description',
             'title' => 'Часто задаваемые вопросы',
         ]);
 
         Page::factory()->create([
-            'name' => 'referral',
-            'slug' => 'referral',
-            'view' => 'pages.referral',
-            'meta_title' => 'Referral',
-            'meta_description' => 'Referral Description',
-            'title' => 'Реферальная программа',
+            'name' => 'contacts',
+            'slug' => 'contacts',
+            'view' => 'pages.contacts.contacts',
+            'meta_title' => 'Contacts',
+            'meta_description' => 'Contacts Description',
+            'title' => 'Контакты',
         ]);
+
         Page::factory()->create([
-            'name' => 'referral-players',
-            'slug' => 'referral_for_players',
-            'view' => 'pages.referral.players',
-            'meta_title' => 'Referral',
-            'meta_description' => 'Referral Description',
-            'title' => 'Реферальная программа для игроков',
+            'name' => 'profile',
+            'prefix' => 'user',
+            'slug' => 'profile',
+            'view' => 'user.profile.profile',
+            'meta_title' => 'Личный кабинет',
+            'meta_description' => 'User Description',
+            'title' => 'Личный кабинет',
         ]);
+
         Page::factory()->create([
-            'name' => 'referral-developers',
-            'slug' => 'referral_for_developers',
-            'view' => 'pages.referral.developers',
-            'meta_title' => 'Referral',
-            'meta_description' => 'Referral Description',
-            'title' => 'Реферальная программа для вебмастеров',
+            'name' => 'dashboard',
+            'prefix' => 'admin',
+            'slug' => 'dashboard',
+            'view' => 'admin.dashboard.dashboard',
+            'meta_title' => 'Dashboard',
+            'meta_description' => 'Dashboard Description',
+            'title' => 'Панель администратора',
+        ]);
+
+        Page::factory()->create([
+            'name' => 'login',
+            'prefix' => 'admin',
+            'slug' => 'login',
+            'view' => 'admin.login.login',
+            'meta_title' => 'Login',
+            'meta_description' => 'Login Description',
+            'title' => 'Login',
         ]);
     }
 }

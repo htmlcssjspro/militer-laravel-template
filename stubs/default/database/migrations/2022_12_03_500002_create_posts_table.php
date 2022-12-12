@@ -14,7 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('posts', function (Blueprint $table) {
-            $table->id();
+            $table->id()->from(1001);
+
+            $table->foreignId('user_id')->constrained('users')
+                ->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('title');
+            $table->text('body');
+
             $table->timestamps();
         });
     }
