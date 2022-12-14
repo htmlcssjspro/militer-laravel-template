@@ -45,13 +45,23 @@ trait InstallsCommon
             app_path('Helpers')
         );
 
-        $composerJson = json_decode(file_get_contents(base_path('composer.json')), true);
+        $helpers = [
+            'app/Helpers/helpers.php',
+        ];
 
+        $composerJson = json_decode(file_get_contents(base_path('composer.json')), true);
         $autoload = array_key_exists('autoload', $composerJson) ? $composerJson['autoload'] : [];
         $files = array_key_exists('files', $autoload) ? $autoload['files'] : [];
 
-        $composerJson['autoload']['files'][] = 'app/Helpers/helpers.php';
+        // $composerJson['autoload']['files'][] = 'app/Helpers/helpers.php';
 
+        foreach ($helpers as $helper) {
+            if (!in_array($helper, $files)) {
+                array_push($files, $helper);
+            }
+        }
+
+        $composerJson['autoload']['files'] = $files;
         ksort($composerJson['autoload']['files']);
 
         file_put_contents(
