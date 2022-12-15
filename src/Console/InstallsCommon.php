@@ -53,8 +53,6 @@ trait InstallsCommon
         $autoload = array_key_exists('autoload', $composerJson) ? $composerJson['autoload'] : [];
         $files = array_key_exists('files', $autoload) ? $autoload['files'] : [];
 
-        // $composerJson['autoload']['files'][] = 'app/Helpers/helpers.php';
-
         foreach ($helpers as $helper) {
             if (!in_array($helper, $files)) {
                 array_push($files, $helper);

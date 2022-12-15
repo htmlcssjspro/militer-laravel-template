@@ -26,6 +26,18 @@ class TestController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Test  $test
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Test $test)
+    {
+        //
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -52,17 +64,6 @@ class TestController extends Controller
         $test = Test::create([
             'name' => 'Test',
         ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Test  $test
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Test $test)
-    {
-        //
     }
 
     /**

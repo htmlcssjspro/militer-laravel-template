@@ -16,7 +16,7 @@ class PageController extends Controller
      */
     public function index()
     {
-        $compilationCount = 10;
+        return view('pages.home.home');
 
         $page = Page::firstWhere('slug', 'home');
 

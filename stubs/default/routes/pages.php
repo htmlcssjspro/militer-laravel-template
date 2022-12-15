@@ -1,21 +1,30 @@
 <?php
 
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
-Route::get('/', function () {
-    return view('pages.home.home');
-})->name('home');
+Route::controller(PageController::class)->group(function () {
+    Route::permanentRedirect('/home', '/');
+    Route::get('/', 'index')->name('home');
+
+    Route::name('pages.')->group(function () {
+        Route::prefix('pages')
+            ->middleware('auth:admin')->group(function () {
+                Route::get('/create', 'create')->name('create');
+                Route::post('/', 'store')->name('store');
+                Route::get('/{page:slug}/edit', 'edit')->name('edit');
+                Route::match(['put', 'patch'], '/{page:slug}', 'update')->name('update');
+                Route::delete('/{page:slug}', 'destroy')->name('destroy');
+            });
+
+        // Route::get('/rating', 'rating')->name('rating');
+
+        Route::get('/{page:slug}', 'show')->name('show');
+    });
+});
+
+
 
 Route::get('/test', function () {
     return view('pages.test.test');
